@@ -872,18 +872,20 @@
         document.addEventListener('DOMContentLoaded', () => {
             
             // 1. AUTO-PULIZIA FILE MANCANTI (Immagini e Video)
-            // Se cancelli un file, il riquadro sparisce da solo.
-            
-            // Per le immagini
             document.querySelectorAll('img').forEach(img => {
                 img.onerror = function() {
-                    // Nascondi il contenitore genitore (item)
-                    let container = this.closest('.gallery-item, .portfolio-item, .crew-card, .grid-item');
-                    if(container) container.style.display = 'none';
+                    // Controllo intelligente maiuscole/minuscole (.jpg vs .JPG)
+                    if (this.src.endsWith('.jpg')) {
+                        // Se non trova .jpg prova .JPG
+                        this.src = this.src.replace('.jpg', '.JPG');
+                    } else {
+                        // Se non trova nemmeno .JPG (o altro), cancella il riquadro
+                        let container = this.closest('.gallery-item, .portfolio-item, .crew-card, .grid-item');
+                        if(container) container.style.display = 'none';
+                    }
                 };
             });
 
-            // Per i video (se il file mp4 non c'è, il tag <source> dà errore)
             document.querySelectorAll('source').forEach(source => {
                 source.onerror = function() {
                     let container = this.closest('.portfolio-item');
