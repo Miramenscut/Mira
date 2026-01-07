@@ -305,10 +305,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            cursor: pointer; /* Indica che si può cliccare per chiudere */
+            cursor: pointer; 
         }
 
-        /* Il contenuto interno non deve avere il cursore pointer altrimenti confonde */
         .overlay > * { cursor: default; }
 
         .overlay.open { opacity: 1; visibility: visible; }
@@ -343,7 +342,7 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s;
-            cursor: pointer; /* Clicca fuori per chiudere */
+            cursor: pointer;
         }
 
         .lightbox.active {
@@ -356,7 +355,7 @@
             max-height: 90vh;
             object-fit: contain;
             user-select: none;
-            cursor: default; /* Non chiude se clicchi la foto */
+            cursor: default;
         }
 
         .lightbox-nav {
@@ -472,7 +471,6 @@
             position: relative;
         }
 
-        /* Aggiunto cursor pointer per le foto zoomabili nel portfolio */
         .portfolio-item .zoomable { cursor: pointer; }
 
         .portfolio-media { width: 100%; height: 100%; object-fit: cover; }
@@ -537,7 +535,6 @@
             .grid-container { height: auto; flex-direction: column; }
             .grid-item { height: 280px; border-right: none; border-bottom: 1px solid #1a1a1a; }
             
-            /* FIX BG TAGLI: immagine in alto */
             #bg-tagli { background-position: center top 10px; }
 
             .footer-container { flex-direction: column; text-align: center; gap: 50px; }
@@ -874,17 +871,36 @@
         // --- JS LOGICA COMPLETA ---
         document.addEventListener('DOMContentLoaded', () => {
             
-            // 1. CHIUSURA CLICK OUTSIDE (Per gli overlay principali)
+            // 1. AUTO-PULIZIA FILE MANCANTI (Immagini e Video)
+            // Se cancelli un file, il riquadro sparisce da solo.
+            
+            // Per le immagini
+            document.querySelectorAll('img').forEach(img => {
+                img.onerror = function() {
+                    // Nascondi il contenitore genitore (item)
+                    let container = this.closest('.gallery-item, .portfolio-item, .crew-card, .grid-item');
+                    if(container) container.style.display = 'none';
+                };
+            });
+
+            // Per i video (se il file mp4 non c'è, il tag <source> dà errore)
+            document.querySelectorAll('source').forEach(source => {
+                source.onerror = function() {
+                    let container = this.closest('.portfolio-item');
+                    if(container) container.style.display = 'none';
+                };
+            });
+
+            // 2. CHIUSURA CLICK OUTSIDE (Per gli overlay principali)
             document.querySelectorAll('.overlay').forEach(overlay => {
                 overlay.addEventListener('click', function(e) {
-                    // Se clicco l'overlay stesso (il nero) e non il suo contenuto
                     if (e.target === this) {
                         closeOverlay(this.id);
                     }
                 });
             });
 
-            // 2. GESTIONE VIDEO (Pausa automatica)
+            // 3. GESTIONE VIDEO (Pausa automatica)
             const videos = document.querySelectorAll('video');
             videos.forEach(video => {
                 video.addEventListener('play', (event) => {
@@ -896,7 +912,7 @@
                 });
             });
 
-            // 3. GESTIONE LIGHTBOX DINAMICA
+            // 4. GESTIONE LIGHTBOX DINAMICA
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             let currentGallery = []; 
