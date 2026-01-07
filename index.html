@@ -504,11 +504,15 @@
         .col-center { text-align: center; padding: 0 10px; display: flex; flex-direction: column; align-items: center; }
         .footer-heading { color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-size: 0.8rem; font-weight: 600; }
         .about-text { line-height: 1.8; margin-bottom: 30px; max-width: 320px; }
+        
+        /* Social Group per tenerli insieme su mobile */
+        .social-group { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+
         .social-link { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; border: 1px solid #333; padding: 12px 25px; transition: 0.3s; }
         .social-link:hover { background: #fff; color: #000; }
         
-        .whatsapp-icon-footer { margin-top: 20px; font-size: 1.8rem; color: #888; transition: 0.3s; padding: 10px; }
-        .whatsapp-icon-footer:hover { color: #25D366; }
+        .whatsapp-icon-footer { font-size: 1.8rem; color: #888; transition: 0.3s; padding: 10px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; height: 43px; width: 50px; }
+        .whatsapp-icon-footer:hover { color: #25D366; background: #fff; border-color: #fff; }
 
         .col-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
         .hours-box { border: 1px solid #333; padding: 25px; text-align: center; width: 100%; max-width: 300px; }
@@ -537,10 +541,40 @@
             
             #bg-tagli { background-position: center top 10px; }
 
-            .footer-container { flex-direction: column; text-align: center; gap: 50px; }
-            .col-right, .col-center, .footer-col { align-items: center; text-align: center; width: 100%; }
-            .footer-logo { margin: 0 auto 20px auto; }
+            /* --- FOOTER MOBILE REORDERING --- */
+            .footer-container { 
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            /* Rimuove i "contenitori colonna" dal flusso visivo */
+            .footer-col { display: contents; }
+
+            /* Ordine specifico richiesto */
+            /* 1. About */
+            .footer-heading { order: 1; }
+            .about-text { order: 2; margin-bottom: 20px; }
             
+            /* 2. Social */
+            .social-group { order: 3; justify-content: center; width: 100%; margin-bottom: 30px; }
+            
+            /* 3. Logo Mira */
+            .footer-logo { order: 4; margin: 0 auto 10px auto; }
+            
+            /* 4. Slogan */
+            .slogan { order: 5; margin-bottom: 30px; }
+            
+            /* 5. Orari */
+            .col-right { order: 6; width: 100%; align-items: center; margin-bottom: 20px; }
+            .hours-box { max-width: 100%; }
+
+            /* 6. Via (Address) */
+            .footer-address { order: 7; margin-bottom: 20px; }
+            
+            /* 7. Copyright */
+            .copyright { order: 8; margin-top: 10px; }
+
             .crew-content-container { 
                 flex-direction: column; 
                 align-items: center; 
@@ -823,18 +857,22 @@
                     <a href="legal.html" style="text-decoration: underline; color: #666; margin-top: 5px; display: inline-block;">Privacy & Termini</a>
                 </div>
             </div>
+            
             <div class="footer-col col-center">
                 <h4 class="footer-heading">About Mira</h4>
                 <p class="about-text">
                     Un ambiente esclusivo dove la tradizione della barberia incontra l'estetica contemporanea. Precisione, cura e dettaglio.
                 </p>
-                <a href="https://www.instagram.com/miramenscut/" target="_blank" class="social-link">
-                    <i class="fab fa-instagram"></i> Seguici su Instagram
-                </a>
-                <a href="https://wa.me/393762061609?text=Ciao,%20vorrei%20prenotare%20un%20appuntamento%20presso%20MIRA." class="whatsapp-icon-footer">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
+                <div class="social-group">
+                    <a href="https://www.instagram.com/miramenscut/" target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i> Seguici su Instagram
+                    </a>
+                    <a href="https://wa.me/393762061609?text=Ciao,%20vorrei%20prenotare%20un%20appuntamento%20presso%20MIRA." class="whatsapp-icon-footer">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
+            
             <div class="footer-col col-right">
                 <div class="hours-box">
                     <span>Orari di Apertura</span>
@@ -871,15 +909,24 @@
         // --- JS LOGICA COMPLETA ---
         document.addEventListener('DOMContentLoaded', () => {
             
-            // 1. AUTO-PULIZIA FILE MANCANTI (Immagini e Video)
+            // 1. AUTO-PULIZIA FILE MANCANTI e FIX MAIUSCOLE/MINUSCOLE
             document.querySelectorAll('img').forEach(img => {
                 img.onerror = function() {
-                    // Controllo intelligente maiuscole/minuscole (.jpg vs .JPG)
+                    // Contrassegna l'immagine come rotta per la lightbox
+                    this.classList.add('broken');
+
                     if (this.src.endsWith('.jpg')) {
-                        // Se non trova .jpg prova .JPG
+                        // Se fallisce .jpg, prova .JPG
                         this.src = this.src.replace('.jpg', '.JPG');
+                        // Se fallisce anche .JPG, scatterà un secondo errore
+                        // che possiamo gestire rimuovendo l'elemento o lasciando il display:none
+                        // Per sicurezza se fallisce ancora:
+                        this.onerror = function() {
+                             let container = this.closest('.gallery-item, .portfolio-item, .crew-card, .grid-item');
+                             if(container) container.style.display = 'none';
+                        }
                     } else {
-                        // Se non trova nemmeno .JPG (o altro), cancella il riquadro
+                        // Se non è jpg o ha già fallito, nascondi il contenitore
                         let container = this.closest('.gallery-item, .portfolio-item, .crew-card, .grid-item');
                         if(container) container.style.display = 'none';
                     }
@@ -893,7 +940,7 @@
                 };
             });
 
-            // 2. CHIUSURA CLICK OUTSIDE (Per gli overlay principali)
+            // 2. CHIUSURA CLICK OUTSIDE
             document.querySelectorAll('.overlay').forEach(overlay => {
                 overlay.addEventListener('click', function(e) {
                     if (e.target === this) {
@@ -902,7 +949,7 @@
                 });
             });
 
-            // 3. GESTIONE VIDEO (Pausa automatica)
+            // 3. GESTIONE VIDEO
             const videos = document.querySelectorAll('video');
             videos.forEach(video => {
                 video.addEventListener('play', (event) => {
@@ -914,7 +961,7 @@
                 });
             });
 
-            // 4. GESTIONE LIGHTBOX DINAMICA
+            // 4. GESTIONE LIGHTBOX DINAMICA (Esclude foto rotte/nascoste)
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             let currentGallery = []; 
@@ -924,10 +971,17 @@
 
             allZoomableImages.forEach(img => {
                 img.onclick = (e) => {
+                    // Evita di aprire foto rotte
+                    if(img.classList.contains('broken') || img.style.display === 'none') return;
+
                     const container = img.closest('.gallery-container, .portfolio-grid');
-                    currentGallery = Array.from(container.querySelectorAll('.zoomable'));
+                    // Seleziona solo le foto NON rotte di questo contenitore
+                    currentGallery = Array.from(container.querySelectorAll('.zoomable:not(.broken)'));
+                    
                     currentIndex = currentGallery.indexOf(img);
-                    openLightbox();
+                    if(currentIndex !== -1) {
+                        openLightbox();
+                    }
                     e.stopPropagation(); 
                 }
             });
@@ -941,9 +995,7 @@
                 lightbox.classList.remove('active');
             }
             
-            // Chiusura Lightbox cliccando fuori
             lightbox.addEventListener('click', (e) => {
-                // Se clicco il nero e non l'immagine o le frecce
                 if (e.target === lightbox) {
                     closeLightbox();
                 }
@@ -962,7 +1014,7 @@
                 }
             }
 
-            // Swipe per Mobile
+            // Swipe Mobile
             let touchStartX = 0;
             let touchEndX = 0;
 
