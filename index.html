@@ -502,10 +502,21 @@
         .copyright { font-size: 0.7rem; text-transform: uppercase; opacity: 0.5; letter-spacing: 1px; }
 
         .col-center { text-align: center; padding: 0 10px; display: flex; flex-direction: column; align-items: center; }
-        .footer-heading { color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-size: 0.8rem; font-weight: 600; }
+        
+        /* Modifica Typography richiesta: Più grande del testo normale, ma proporzionato al logo */
+        .footer-heading { 
+            color: #fff; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            margin-bottom: 20px; 
+            font-size: 1.3rem; /* Aumentato */ 
+            font-weight: 600; 
+        }
+        
         .about-text { line-height: 1.8; margin-bottom: 30px; max-width: 320px; }
         
-        .social-group { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+        /* Social Group per tenerli insieme */
+        .social-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-bottom: 10px; }
 
         .social-link { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; border: 1px solid #333; padding: 12px 25px; transition: 0.3s; }
         .social-link:hover { background: #fff; color: #000; }
@@ -538,7 +549,8 @@
             .grid-container { height: auto; flex-direction: column; }
             .grid-item { height: 280px; border-right: none; border-bottom: 1px solid #1a1a1a; }
             
-            #bg-tagli { background-position: center top 10px; }
+            #bg-tagli { background-position: center 50%; }
+	    #bg-salone { background-position: center 53%; }
 
             /* --- FOOTER MOBILE (Reordered) --- */
             .footer-container { 
@@ -546,7 +558,7 @@
                 flex-direction: column;
                 align-items: center; /* Centra orizzontalmente tutti i figli */
                 text-align: center;
-                gap: 0; /* Gestiamo lo spazio con i margin */
+                gap: 0;
             }
             
             /* Smonta le colonne per riordinare i pezzi */
@@ -560,7 +572,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 width: 100%;
-                max-width: 300px; /* Limita larghezza testo */
+                max-width: 300px;
             }
 
             /* ORDINE SPECIFICO */
@@ -568,7 +580,7 @@
             .footer-heading { order: 1; margin-bottom: 15px; }
             .about-text { order: 2; margin-bottom: 30px; }
             
-            /* 2. Social */
+            /* 2. Social (Stacked) */
             .social-group { order: 3; justify-content: center; margin-bottom: 40px; }
             
             /* 3. Logo */
@@ -577,11 +589,11 @@
             /* 4. Slogan */
             .slogan { order: 5; margin-bottom: 40px; }
             
-            /* 5. Orari */
-            .hours-box { order: 6; margin-bottom: 40px; }
+            /* 5. Via (Address) - Spostato SOPRA gli orari */
+            .footer-address { order: 6; margin-bottom: 20px; }
 
-            /* 6. Via */
-            .footer-address { order: 7; margin-bottom: 20px; }
+            /* 6. Orari */
+            .hours-box { order: 7; margin-bottom: 40px; }
             
             /* 7. Copyright */
             .copyright { order: 8; margin-top: 10px; padding-bottom: 30px; }
@@ -742,7 +754,7 @@
         <div class="grid-container">
             
             <div class="grid-item" onclick="openOverlay('locationOverlay')">
-                <div class="grid-bg" style="background-image: url('img-salone.jpg');"></div>
+                <div class="grid-bg" id="bg-salone" style="background-image: url('img-salone.jpg');"></div>
                 <div class="grid-content">
                     <h3 class="grid-title">Location</h3>
                     <span class="grid-subtitle">Il Salone</span>
