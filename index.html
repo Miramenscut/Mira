@@ -16,6 +16,8 @@
             --border-color: #222222;
         }
 
+        html { scroll-behavior: smooth; }
+
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
@@ -47,10 +49,10 @@
         .header-logo { height: 28px; width: auto; display: block; }
 
         .btn-prenota {
-            background: rgba(255,255,255,0.1); /* Leggero sfondo per leggibilità */
+            background: rgba(255,255,255,0.1);
             border: 1px solid #fff;
             color: #fff;
-            padding: 10px 24px; /* Tasto più grande per il touch */
+            padding: 10px 24px;
             text-transform: uppercase;
             font-size: 0.75rem; 
             letter-spacing: 2px;
@@ -121,7 +123,7 @@
             opacity: 0.7;
             animation: bounce 2s infinite;
             cursor: pointer;
-            padding: 20px; /* Area di tocco più grande */
+            padding: 20px;
         }
 
         @keyframes bounce {
@@ -167,7 +169,6 @@
             transition: 0.3s;
         }
 
-        /* Hover disabilitato su touch per evitare sfarfallii */
         @media (hover: hover) {
             .service-item:hover .service-header {
                 color: #fff;
@@ -191,7 +192,7 @@
             font-size: 0.7rem;
             opacity: 0.5;
             transition: transform 0.3s;
-            min-width: 15px; /* Evita che si schiacci su mobile */
+            min-width: 15px;
         }
 
         .service-desc {
@@ -199,7 +200,7 @@
             overflow: hidden;
             transition: max-height 0.4s ease-out, opacity 0.4s ease;
             opacity: 0;
-            padding: 0 10px 0 25px; /* Meno padding a sinistra su mobile */
+            padding: 0 10px 0 25px;
             color: #d1d1d1;
             font-size: 0.9rem;
             line-height: 1.6;
@@ -210,7 +211,7 @@
         }
 
         .service-item.active .service-desc {
-            max-height: 200px; /* Aumentato per sicurezza su testi lunghi mobile */
+            max-height: 200px; 
             opacity: 1;
             margin-bottom: 25px;
             padding-top: 10px;
@@ -222,10 +223,7 @@
             opacity: 1;
         }
 
-        .service-item.active .service-header {
-            color: #fff; 
-            font-weight: 500;
-        }
+        .service-item.active .service-header { color: #fff; font-weight: 500; }
 
         /* --- VISUAL GRID --- */
         .visual-section { padding: 0; background-color: #0a0a0a; }
@@ -266,6 +264,8 @@
             }
         }
 
+        #bg-tagli { background-position: center center; }
+
         .grid-content {
             position: absolute;
             bottom: 40px;
@@ -289,7 +289,7 @@
             color: #ccc;
         }
 
-        /* --- CREW OVERLAY --- */
+        /* --- OVERLAY CONDIVISO (Base) --- */
         .overlay {
             height: 100%;
             width: 100%;
@@ -298,22 +298,23 @@
             top: 0;
             left: 0;
             background-color: rgba(0,0,0, 0.98);
-            overflow-y: auto; /* Permette scroll su schermi piccoli */
+            overflow-y: auto;
             transition: 0.4s;
             opacity: 0;
-            visibility: hidden; /* Migliora performance */
+            visibility: hidden;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            cursor: pointer; /* Indica che si può cliccare per chiudere */
         }
 
-        .overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
+        /* Il contenuto interno non deve avere il cursore pointer altrimenti confonde */
+        .overlay > * { cursor: default; }
+
+        .overlay.open { opacity: 1; visibility: visible; }
 
         .overlay-close-btn {
-            position: fixed; /* Fixed così rimane in alto anche se scrolli */
+            position: fixed;
             top: 25px;
             right: 30px;
             font-size: 40px;
@@ -323,8 +324,68 @@
             width: 50px; height: 50px;
             display: flex; align-items: center; justify-content: center;
             border-radius: 50%;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
         }
 
+        /* --- LIGHTBOX (GALLERIA FULL SCREEN) --- */
+        .lightbox {
+            position: fixed;
+            z-index: 3000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            cursor: pointer; /* Clicca fuori per chiudere */
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-img {
+            max-width: 95%;
+            max-height: 90vh;
+            object-fit: contain;
+            user-select: none;
+            cursor: default; /* Non chiude se clicchi la foto */
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            z-index: 3001;
+            user-select: none;
+            opacity: 0.7;
+        }
+        .lightbox-nav:hover { opacity: 1; }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            color: white;
+            cursor: pointer;
+            z-index: 3002;
+        }
+
+        /* --- STILI CREW --- */
         .crew-content-container {
             display: flex;
             justify-content: center;
@@ -332,7 +393,8 @@
             gap: 40px;
             width: 100%;
             max-width: 1000px;
-            padding: 80px 20px 40px 20px; /* Padding top alto per evitare la X */
+            padding: 80px 20px 40px 20px;
+            margin: auto 0; 
         }
 
         .crew-card {
@@ -356,6 +418,64 @@
         .crew-info { padding: 20px; }
         .crew-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #fff; margin-bottom: 5px; }
         .crew-role { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #888; }
+
+        /* --- STILI LOCATION --- */
+        .gallery-container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 100px 20px 40px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            width: 100%;
+            aspect-ratio: 4/3; 
+            border-radius: 4px;
+            overflow: hidden;
+            background: #111;
+            flex: unset; 
+            max-width: unset;
+            height: unset;
+            margin: unset;
+            scroll-snap-align: unset;
+            cursor: pointer;
+        }
+        
+        .gallery-spacer { display: none; }
+        
+        .zoomable {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; cursor: pointer;
+        }
+        
+        @media (hover: hover) {
+            .gallery-item:hover .zoomable { transform: scale(1.03); }
+        }
+
+        /* --- STILI PORTFOLIO --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 100px 20px 40px 20px;
+        }
+
+        .portfolio-item {
+            aspect-ratio: 9/16; 
+            background-color: #111;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        /* Aggiunto cursor pointer per le foto zoomabili nel portfolio */
+        .portfolio-item .zoomable { cursor: pointer; }
+
+        .portfolio-media { width: 100%; height: 100%; object-fit: cover; }
 
         /* --- FOOTER --- */
         footer {
@@ -399,8 +519,6 @@
         .hours-big { font-size: 1.2rem; color: #fff; font-weight: 600; margin-top: 5px; letter-spacing: 1px; }
 
         /* --- MEDIA QUERIES (RESPONSIVENESS) --- */
-        
-        /* Tablet & iPad (Portrait) */
         @media (min-width: 768px) and (max-width: 1024px) {
             .grid-container { height: 45vh; min-height: 400px; }
             .grid-title { font-size: 1.5rem; }
@@ -409,7 +527,6 @@
             .crew-content-container { align-items: center; }
         }
 
-        /* Mobile (Smartphone) */
         @media (max-width: 767px) {
             header { padding: 15px 20px; }
             .header-logo { height: 24px; }
@@ -420,12 +537,43 @@
             .grid-container { height: auto; flex-direction: column; }
             .grid-item { height: 280px; border-right: none; border-bottom: 1px solid #1a1a1a; }
             
+            /* FIX BG TAGLI: immagine in alto */
+            #bg-tagli { background-position: center top 10px; }
+
             .footer-container { flex-direction: column; text-align: center; gap: 50px; }
             .col-right, .col-center, .footer-col { align-items: center; text-align: center; width: 100%; }
             .footer-logo { margin: 0 auto 20px auto; }
             
-            .crew-content-container { flex-direction: column; align-items: center; padding-top: 100px; }
-            .overlay-close-btn { top: 15px; right: 15px; background: transparent; }
+            .crew-content-container { 
+                flex-direction: column; 
+                align-items: center; 
+                padding-top: 140px; 
+                margin: 0;
+            }
+            .overlay-close-btn { top: 15px; right: 15px; background: rgba(0,0,0,0.8); }
+
+            /* CAROSELLO LOCATION MOBILE */
+            .gallery-container {
+                display: flex;
+                align-items: center;
+                padding: 80px 0;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                width: 100%;
+                max-width: unset;
+                margin: 0;
+            }
+            
+            .gallery-item {
+                flex: 0 0 80%;
+                max-width: 600px;
+                height: 60vh;
+                margin: 0 15px;
+                scroll-snap-align: center;
+                aspect-ratio: unset;
+            }
+
+            .gallery-spacer { display: block; flex: 0 0 10vw; }
         }
     </style>
 </head>
@@ -550,7 +698,7 @@
     <section class="visual-section">
         <div class="grid-container">
             
-            <div class="grid-item">
+            <div class="grid-item" onclick="openOverlay('locationOverlay')">
                 <div class="grid-bg" style="background-image: url('img-salone.jpg');"></div>
                 <div class="grid-content">
                     <h3 class="grid-title">Location</h3>
@@ -558,15 +706,15 @@
                 </div>
             </div>
 
-            <div class="grid-item">
-                <div class="grid-bg" style="background-image: url('img-tagli.jpg');"></div>
+            <div class="grid-item" onclick="openOverlay('portfolioOverlay')">
+                <div class="grid-bg" id="bg-tagli" style="background-image: url('img-tagli.jpg');"></div>
                 <div class="grid-content">
                     <h3 class="grid-title">Portfolio</h3>
                     <span class="grid-subtitle">I Nostri Tagli</span>
                 </div>
             </div>
 
-            <div class="grid-item" onclick="openCrew()">
+            <div class="grid-item" onclick="openOverlay('crewOverlay')">
                 <div class="grid-bg" style="background-image: url('img-crew.jpg');"></div>
                 <div class="grid-content">
                     <h3 class="grid-title">The Crew</h3>
@@ -577,11 +725,72 @@
         </div>
     </section>
 
-    <div id="crewOverlay" class="overlay">
-        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeCrew()">&times;</a>
+    <div id="locationOverlay" class="overlay">
+        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('locationOverlay')">&times;</a>
         
-        <div class="crew-content-container">
+        <div class="gallery-container">
+            <div class="gallery-spacer"></div>
             
+            <div class="gallery-item"><img src="salone1.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone2.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone3.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone4.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone5.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone6.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone7.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone8.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone9.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone10.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone11.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone12.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone13.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone14.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone15.jpg" class="zoomable"></div>
+            <div class="gallery-item"><img src="salone16.jpg" class="zoomable"></div>
+
+            <div class="gallery-spacer"></div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-nav prev-btn" onclick="changeImage(-1)">&#10094;</div>
+        <img id="lightbox-img" class="lightbox-img" src="">
+        <div class="lightbox-nav next-btn" onclick="changeImage(1)">&#10095;</div>
+    </div>
+
+    <div id="portfolioOverlay" class="overlay">
+        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('portfolioOverlay')">&times;</a>
+        
+        <div class="portfolio-grid">
+            
+            <div class="portfolio-item">
+                <video class="portfolio-media" controls playsinline preload="metadata">
+                    <source src="taglio1.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="portfolio-item">
+                <video class="portfolio-media" controls playsinline preload="metadata">
+                    <source src="taglio2.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="portfolio-item">
+                <video class="portfolio-media" controls playsinline preload="metadata">
+                    <source src="taglio3.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="portfolio-item">
+                <video class="portfolio-media" controls playsinline preload="metadata">
+                    <source src="taglio4.mp4" type="video/mp4">
+                </video>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="crewOverlay" class="overlay">
+        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('crewOverlay')">&times;</a>
+        <div class="crew-content-container">
             <div class="crew-card">
                 <div class="img-placeholder">
                     <img src="fabio.jpg" alt="Fabio" class="crew-photo">
@@ -591,7 +800,6 @@
                     <p class="crew-role">Master Barber</p>
                 </div>
             </div>
-
             <div class="crew-card">
                 <div class="img-placeholder">
                     <img src="giusy.jpg" alt="Giusy" class="crew-photo">
@@ -601,7 +809,6 @@
                     <p class="crew-role">Senior Stylist</p>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -644,30 +851,117 @@
     <script>
         function toggleService(element) {
             const allItems = document.querySelectorAll('.service-item');
-            
             if (element.classList.contains('active')) {
                 element.classList.remove('active');
                 return;
             }
-
-            allItems.forEach(item => {
-                item.classList.remove('active');
-            });
-            
+            allItems.forEach(item => { item.classList.remove('active'); });
             element.classList.add('active');
         }
 
-        function openCrew() {
-            document.getElementById("crewOverlay").classList.add("open");
-            // Disabilita lo scroll della pagina sotto
-            document.body.style.overflow = "hidden";
+        function openOverlay(id) {
+            document.getElementById(id).classList.add("open");
+            document.body.style.overflow = "hidden"; 
         }
 
-        function closeCrew() {
-            document.getElementById("crewOverlay").classList.remove("open");
-            // Riabilita lo scroll della pagina sotto
-            document.body.style.overflow = "auto";
+        function closeOverlay(id) {
+            document.getElementById(id).classList.remove("open");
+            document.body.style.overflow = "auto"; 
+            const allVideos = document.querySelectorAll('video');
+            allVideos.forEach(vid => vid.pause());
         }
+
+        // --- JS LOGICA COMPLETA ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. CHIUSURA CLICK OUTSIDE (Per gli overlay principali)
+            document.querySelectorAll('.overlay').forEach(overlay => {
+                overlay.addEventListener('click', function(e) {
+                    // Se clicco l'overlay stesso (il nero) e non il suo contenuto
+                    if (e.target === this) {
+                        closeOverlay(this.id);
+                    }
+                });
+            });
+
+            // 2. GESTIONE VIDEO (Pausa automatica)
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.addEventListener('play', (event) => {
+                    videos.forEach(otherVideo => {
+                        if (otherVideo !== video) {
+                            otherVideo.pause();
+                        }
+                    });
+                });
+            });
+
+            // 3. GESTIONE LIGHTBOX DINAMICA
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            let currentGallery = []; 
+            let currentIndex = 0;
+
+            const allZoomableImages = document.querySelectorAll('.zoomable');
+
+            allZoomableImages.forEach(img => {
+                img.onclick = (e) => {
+                    const container = img.closest('.gallery-container, .portfolio-grid');
+                    currentGallery = Array.from(container.querySelectorAll('.zoomable'));
+                    currentIndex = currentGallery.indexOf(img);
+                    openLightbox();
+                    e.stopPropagation(); 
+                }
+            });
+
+            window.openLightbox = function() {
+                updateLightboxImage();
+                lightbox.classList.add('active');
+            }
+
+            window.closeLightbox = function() {
+                lightbox.classList.remove('active');
+            }
+            
+            // Chiusura Lightbox cliccando fuori
+            lightbox.addEventListener('click', (e) => {
+                // Se clicco il nero e non l'immagine o le frecce
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            window.changeImage = function(direction) {
+                currentIndex += direction;
+                if (currentIndex >= currentGallery.length) currentIndex = 0;
+                if (currentIndex < 0) currentIndex = currentGallery.length - 1;
+                updateLightboxImage();
+            }
+
+            function updateLightboxImage() {
+                if(currentGallery.length > 0) {
+                    lightboxImg.src = currentGallery[currentIndex].src;
+                }
+            }
+
+            // Swipe per Mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            lightbox.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            lightbox.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) changeImage(1); 
+                if (touchEndX > touchStartX + 50) changeImage(-1);
+            }
+        });
     </script>
 
 </body>
