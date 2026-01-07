@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MIRA Men's Cut | Bari</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- VARIABILI E BASE --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --gray-text: #999999;
+            --border-color: #222222;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.4;
+        }
+
+        a { text-decoration: none; color: white; transition: 0.3s; }
+        ul { list-style: none; }
+
+        .white-logo { filter: invert(1) brightness(100%); }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
+        }
+
+        .header-logo { height: 28px; width: auto; display: block; }
+
+        .btn-prenota {
+            background: rgba(255,255,255,0.1); /* Leggero sfondo per leggibilità */
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 10px 24px; /* Tasto più grande per il touch */
+            text-transform: uppercase;
+            font-size: 0.75rem; 
+            letter-spacing: 2px;
+            font-weight: 500;
+            border-radius: 2px;
+            backdrop-filter: blur(5px);
+        }
+        .btn-prenota:hover { background-color: #fff; color: #000; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-image: url('bg-home.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5); 
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .hero-square-frame {
+            width: min(500px, 70vw); 
+            aspect-ratio: 1 / 1;
+            display: flex;        
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .hero-logo-img { width: 90%; height: auto; }
+
+        .subtitle {
+            font-size: 1rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            font-weight: 300;
+            margin-top: -30px; 
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            padding: 20px; /* Area di tocco più grande */
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* --- LISTINO SERVIZI --- */
+        .pricing {
+            padding: 80px 20px;
+            background-color: #0a0a0a;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pricing-container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .service-item {
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 10px;
+            color: #bbb;
+            transition: 0.3s;
+        }
+
+        /* Hover disabilitato su touch per evitare sfarfallii */
+        @media (hover: hover) {
+            .service-item:hover .service-header {
+                color: #fff;
+                padding-left: 20px; 
+                background-color: #111;
+            }
+        }
+
+        .service-name {
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 400;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .toggle-icon {
+            font-size: 0.7rem;
+            opacity: 0.5;
+            transition: transform 0.3s;
+            min-width: 15px; /* Evita che si schiacci su mobile */
+        }
+
+        .service-desc {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.4s ease;
+            opacity: 0;
+            padding: 0 10px 0 25px; /* Meno padding a sinistra su mobile */
+            color: #d1d1d1;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            font-style: normal;
+            font-weight: 300;
+            border-left: 1px solid #333;
+            margin-left: 18px;
+        }
+
+        .service-item.active .service-desc {
+            max-height: 200px; /* Aumentato per sicurezza su testi lunghi mobile */
+            opacity: 1;
+            margin-bottom: 25px;
+            padding-top: 10px;
+        }
+        
+        .service-item.active .toggle-icon {
+            transform: rotate(90deg);
+            color: #fff;
+            opacity: 1;
+        }
+
+        .service-item.active .service-header {
+            color: #fff; 
+            font-weight: 500;
+        }
+
+        /* --- VISUAL GRID --- */
+        .visual-section { padding: 0; background-color: #0a0a0a; }
+        
+        .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 60vh; 
+            min-height: 500px;
+        }
+
+        .grid-item {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            border-right: 1px solid #1a1a1a;
+            cursor: pointer;
+        }
+
+        .grid-item:last-child { border-right: none; }
+
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s ease;
+            filter: grayscale(100%) brightness(0.6); 
+        }
+        
+        @media (hover: hover) {
+            .grid-item:hover .grid-bg {
+                transform: scale(1.05); 
+                filter: grayscale(0%) brightness(0.8); 
+            }
+        }
+
+        .grid-content {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .grid-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .grid-subtitle {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.7rem;
+            color: #ccc;
+        }
+
+        /* --- CREW OVERLAY --- */
+        .overlay {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            background-color: rgba(0,0,0, 0.98);
+            overflow-y: auto; /* Permette scroll su schermi piccoli */
+            transition: 0.4s;
+            opacity: 0;
+            visibility: hidden; /* Migliora performance */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .overlay-close-btn {
+            position: fixed; /* Fixed così rimane in alto anche se scrolli */
+            top: 25px;
+            right: 30px;
+            font-size: 40px;
+            color: #fff;
+            z-index: 2005;
+            background: rgba(0,0,0,0.5);
+            width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+        }
+
+        .crew-content-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            width: 100%;
+            max-width: 1000px;
+            padding: 80px 20px 40px 20px; /* Padding top alto per evitare la X */
+        }
+
+        .crew-card {
+            width: 280px;
+            background-color: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 320px;
+            background-color: #1a1a1a;
+            position: relative;
+        }
+        
+        .crew-photo { width: 100%; height: 100%; object-fit: cover; }
+        .crew-info { padding: 20px; }
+        .crew-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #fff; margin-bottom: 5px; }
+        .crew-role { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #888; }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #050505;
+            border-top: 1px solid #111;
+            padding: 60px 20px;
+            color: var(--gray-text);
+            font-size: 0.85rem;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap; 
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .footer-col { flex: 1; min-width: 280px; }
+
+        .footer-logo { width: 120px; height: auto; margin-bottom: 25px; opacity: 0.9; }
+        .footer-address { margin-bottom: 25px; line-height: 1.8; }
+        .slogan { font-family: 'Playfair Display', serif; font-style: italic; margin-bottom: 30px; color: #fff; font-size: 1.1rem; }
+        .copyright { font-size: 0.7rem; text-transform: uppercase; opacity: 0.5; letter-spacing: 1px; }
+
+        .col-center { text-align: center; padding: 0 10px; display: flex; flex-direction: column; align-items: center; }
+        .footer-heading { color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-size: 0.8rem; font-weight: 600; }
+        .about-text { line-height: 1.8; margin-bottom: 30px; max-width: 320px; }
+        .social-link { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; border: 1px solid #333; padding: 12px 25px; transition: 0.3s; }
+        .social-link:hover { background: #fff; color: #000; }
+        
+        .whatsapp-icon-footer { margin-top: 20px; font-size: 1.8rem; color: #888; transition: 0.3s; padding: 10px; }
+        .whatsapp-icon-footer:hover { color: #25D366; }
+
+        .col-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
+        .hours-box { border: 1px solid #333; padding: 25px; text-align: center; width: 100%; max-width: 300px; }
+        .hours-box span { display: block; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; color: #888; margin-bottom: 10px; }
+        .hours-box p { font-size: 0.9rem; color: #ccc; }
+        .hours-big { font-size: 1.2rem; color: #fff; font-weight: 600; margin-top: 5px; letter-spacing: 1px; }
+
+        /* --- MEDIA QUERIES (RESPONSIVENESS) --- */
+        
+        /* Tablet & iPad (Portrait) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .grid-container { height: 45vh; min-height: 400px; }
+            .grid-title { font-size: 1.5rem; }
+            .pricing { padding: 60px 20px; }
+            .hero-logo-img { width: 70%; }
+            .crew-content-container { align-items: center; }
+        }
+
+        /* Mobile (Smartphone) */
+        @media (max-width: 767px) {
+            header { padding: 15px 20px; }
+            .header-logo { height: 24px; }
+            
+            .hero-square-frame { width: 85vw; }
+            .subtitle { font-size: 0.8rem; letter-spacing: 5px; margin-top: -20px; }
+            
+            .grid-container { height: auto; flex-direction: column; }
+            .grid-item { height: 280px; border-right: none; border-bottom: 1px solid #1a1a1a; }
+            
+            .footer-container { flex-direction: column; text-align: center; gap: 50px; }
+            .col-right, .col-center, .footer-col { align-items: center; text-align: center; width: 100%; }
+            .footer-logo { margin: 0 auto 20px auto; }
+            
+            .crew-content-container { flex-direction: column; align-items: center; padding-top: 100px; }
+            .overlay-close-btn { top: 15px; right: 15px; background: transparent; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo.svg" alt="MIRA Logo" class="header-logo white-logo">
+        <a href="https://wa.me/393762061609?text=Ciao,%20vorrei%20prenotare%20un%20appuntamento%20presso%20MIRA." class="btn-prenota">Prenota</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-square-frame">
+                <img src="logo.svg" alt="MIRA" class="hero-logo-img white-logo">
+            </div>
+            
+            <p class="subtitle">Bari</p>
+            
+            <a href="#servizi" class="scroll-down">
+                <i class="fas fa-chevron-down" style="color: white;"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="pricing" id="servizi">
+        <div class="pricing-container">
+            <h2 class="section-title">Servizi</h2>
+            
+            <div class="service-item" onclick="toggleService(this)">
+                <div class="service-header">
+                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio con Shampoo</div>
+                </div>
+                <div class="service-desc">
+                    Servizio di taglio compreso di shampoo prima e dopo, eseguito a macchinetta con styling incluso.
+                </div>
+            </div>
+
+            <div class="service-item" onclick="toggleService(this)">
+                <div class="service-header">
+                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio Pettine e Forbici</div>
+                </div>
+                <div class="service-desc">
+                    Servizio di taglio compreso di shampoo e balsamo prima e dopo, eseguito a forbici con rifinitura a rasoio e finish styling incluso.
+                </div>
+            </div>
+
+            <div class="service-item" onclick="toggleService(this)">
+                <div class="service-header">
+                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio Bambino</div>
+                </div>
+                <div class="service-desc">
+                    Servizio di taglio compreso di shampoo riservato a ragazzi 0 - 15 anni.
+                </div>
+            </div>
+
+            <div class="service-item" onclick="toggleService(this)">
+                <div class="service-header">
+                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Barba / Rasatura Tradizionale</div>
+                </div>
+                <div class="service-desc">
+                    Servizio di rasatura barba comprensivo di: crema "pre-barba", panno caldo pre rasatura e panno freddo post rasatura.
+                </div>
+            </div>
+
+            <div class="service-item" onclick="toggleService(this)">
+                <div class="service-header">
+                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Barba Lunga</div>
+                </div>
+                <div class="service-desc">
+                    Servizio che include: detersione barba, panno caldo, asciugatura, modellatura, rasatura e panno freddo post rasatura.
+                </div>
+            </div>
+
+            <div class="service-item" onclick="toggleService(this)">
+                <div class="service-header">
+                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Ritual Barba</div>
+                </div>
+                <div class="service-desc">
+                    Servizio che include: detersione barba, panno caldo pre rasatura e panno freddo post rasatura.
+                </div>
+            </div>
+
+            <div class="service-item" onclick="toggleService(this)">
+                <div class="service-header">
+                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Air Oiling / Anti Caduta</div>
+                </div>
+                <div class="service-desc">
+                    Trattamento agli olii essenziali per cura della cute.
+                </div>
+            </div>
+
+            <div class="service-item" onclick="toggleService(this)">
+                <div class="service-header">
+                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Trattamento Purificante</div>
+                </div>
+                <div class="service-desc">
+                    Trattamento scrub cute + lozione.
+                </div>
+            </div>
+
+            <div class="service-item" onclick="toggleService(this)">
+                <div class="service-header">
+                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Trattamento Viso</div>
+                </div>
+                <div class="service-desc">
+                    Trattamento specifico che comprende: detersione, panno caldo, applicazione maschera, applicazione siero e crema.
+                </div>
+            </div>
+
+            <div class="service-item" onclick="toggleService(this)">
+                <div class="service-header">
+                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Sopracciglia</div>
+                </div>
+                <div class="service-desc">
+                    Trattamento estetico di pulizia della forma con pinzetta.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="visual-section">
+        <div class="grid-container">
+            
+            <div class="grid-item">
+                <div class="grid-bg" style="background-image: url('img-salone.jpg');"></div>
+                <div class="grid-content">
+                    <h3 class="grid-title">Location</h3>
+                    <span class="grid-subtitle">Il Salone</span>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-bg" style="background-image: url('img-tagli.jpg');"></div>
+                <div class="grid-content">
+                    <h3 class="grid-title">Portfolio</h3>
+                    <span class="grid-subtitle">I Nostri Tagli</span>
+                </div>
+            </div>
+
+            <div class="grid-item" onclick="openCrew()">
+                <div class="grid-bg" style="background-image: url('img-crew.jpg');"></div>
+                <div class="grid-content">
+                    <h3 class="grid-title">The Crew</h3>
+                    <span class="grid-subtitle">I Nostri Barbieri</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="crewOverlay" class="overlay">
+        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeCrew()">&times;</a>
+        
+        <div class="crew-content-container">
+            
+            <div class="crew-card">
+                <div class="img-placeholder">
+                    <img src="fabio.jpg" alt="Fabio" class="crew-photo">
+                </div>
+                <div class="crew-info">
+                    <h3 class="crew-name">Fabio</h3>
+                    <p class="crew-role">Master Barber</p>
+                </div>
+            </div>
+
+            <div class="crew-card">
+                <div class="img-placeholder">
+                    <img src="giusy.jpg" alt="Giusy" class="crew-photo">
+                </div>
+                <div class="crew-info">
+                    <h3 class="crew-name">Giusy</h3>
+                    <p class="crew-role">Senior Stylist</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <img src="logo.svg" alt="MIRA Logo" class="footer-logo white-logo">
+                <div class="footer-address">
+                    <p>Via Giulio Petroni 12</p>
+                    <p>70124 Bari, Italia</p>
+                </div>
+                <p class="slogan">"Definire lo stile,<br>un taglio alla volta."</p>
+                <div class="copyright">
+                    &copy; 2025 MIRA Men's Cut.<br>All Rights Reserved.<br>
+                    <a href="legal.html" style="text-decoration: underline; color: #666; margin-top: 5px; display: inline-block;">Privacy & Termini</a>
+                </div>
+            </div>
+            <div class="footer-col col-center">
+                <h4 class="footer-heading">About Mira</h4>
+                <p class="about-text">
+                    Un ambiente esclusivo dove la tradizione della barberia incontra l'estetica contemporanea. Precisione, cura e dettaglio.
+                </p>
+                <a href="https://www.instagram.com/miramenscut/" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i> Seguici su Instagram
+                </a>
+                <a href="https://wa.me/393762061609?text=Ciao,%20vorrei%20prenotare%20un%20appuntamento%20presso%20MIRA." class="whatsapp-icon-footer">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+            <div class="footer-col col-right">
+                <div class="hours-box">
+                    <span>Orari di Apertura</span>
+                    <p>Mar - Sab</p>
+                    <p class="hours-big">9:00 - 20:00</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleService(element) {
+            const allItems = document.querySelectorAll('.service-item');
+            
+            if (element.classList.contains('active')) {
+                element.classList.remove('active');
+                return;
+            }
+
+            allItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            element.classList.add('active');
+        }
+
+        function openCrew() {
+            document.getElementById("crewOverlay").classList.add("open");
+            // Disabilita lo scroll della pagina sotto
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeCrew() {
+            document.getElementById("crewOverlay").classList.remove("open");
+            // Riabilita lo scroll della pagina sotto
+            document.body.style.overflow = "auto";
+        }
+    </script>
+
+</body>
+</html>
