@@ -475,7 +475,7 @@
 
         .portfolio-media { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- FOOTER --- */
+        /* --- FOOTER (Stile Base Desktop) --- */
         footer {
             background-color: #050505;
             border-top: 1px solid #111;
@@ -505,7 +505,6 @@
         .footer-heading { color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-size: 0.8rem; font-weight: 600; }
         .about-text { line-height: 1.8; margin-bottom: 30px; max-width: 320px; }
         
-        /* Social Group per tenerli insieme su mobile */
         .social-group { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
 
         .social-link { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; border: 1px solid #333; padding: 12px 25px; transition: 0.3s; }
@@ -541,40 +540,53 @@
             
             #bg-tagli { background-position: center top 10px; }
 
-            /* --- FOOTER MOBILE REORDERING --- */
+            /* --- FOOTER MOBILE (Reordered) --- */
             .footer-container { 
                 display: flex;
                 flex-direction: column;
+                align-items: center; /* Centra orizzontalmente tutti i figli */
                 text-align: center;
-                gap: 30px;
+                gap: 0; /* Gestiamo lo spazio con i margin */
             }
-            /* Rimuove i "contenitori colonna" dal flusso visivo */
-            .footer-col { display: contents; }
+            
+            /* Smonta le colonne per riordinare i pezzi */
+            .footer-col, .col-right { display: contents; }
 
-            /* Ordine specifico richiesto */
+            /* Stile forzato per tutti gli elementi del footer su mobile */
+            .footer-logo, .footer-address, .slogan, .copyright,
+            .footer-heading, .about-text, .social-group,
+            .hours-box {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+                max-width: 300px; /* Limita larghezza testo */
+            }
+
+            /* ORDINE SPECIFICO */
             /* 1. About */
-            .footer-heading { order: 1; }
-            .about-text { order: 2; margin-bottom: 20px; }
+            .footer-heading { order: 1; margin-bottom: 15px; }
+            .about-text { order: 2; margin-bottom: 30px; }
             
             /* 2. Social */
-            .social-group { order: 3; justify-content: center; width: 100%; margin-bottom: 30px; }
+            .social-group { order: 3; justify-content: center; margin-bottom: 40px; }
             
-            /* 3. Logo Mira */
-            .footer-logo { order: 4; margin: 0 auto 10px auto; }
+            /* 3. Logo */
+            .footer-logo { order: 4; margin-bottom: 20px; width: 100px; }
             
             /* 4. Slogan */
-            .slogan { order: 5; margin-bottom: 30px; }
+            .slogan { order: 5; margin-bottom: 40px; }
             
             /* 5. Orari */
-            .col-right { order: 6; width: 100%; align-items: center; margin-bottom: 20px; }
-            .hours-box { max-width: 100%; }
+            .hours-box { order: 6; margin-bottom: 40px; }
 
-            /* 6. Via (Address) */
+            /* 6. Via */
             .footer-address { order: 7; margin-bottom: 20px; }
             
             /* 7. Copyright */
-            .copyright { order: 8; margin-top: 10px; }
+            .copyright { order: 8; margin-top: 10px; padding-bottom: 30px; }
 
+            /* ALTRI FIX MOBILE */
             .crew-content-container { 
                 flex-direction: column; 
                 align-items: center; 
@@ -916,17 +928,12 @@
                     this.classList.add('broken');
 
                     if (this.src.endsWith('.jpg')) {
-                        // Se fallisce .jpg, prova .JPG
                         this.src = this.src.replace('.jpg', '.JPG');
-                        // Se fallisce anche .JPG, scatterà un secondo errore
-                        // che possiamo gestire rimuovendo l'elemento o lasciando il display:none
-                        // Per sicurezza se fallisce ancora:
                         this.onerror = function() {
                              let container = this.closest('.gallery-item, .portfolio-item, .crew-card, .grid-item');
                              if(container) container.style.display = 'none';
                         }
                     } else {
-                        // Se non è jpg o ha già fallito, nascondi il contenitore
                         let container = this.closest('.gallery-item, .portfolio-item, .crew-card, .grid-item');
                         if(container) container.style.display = 'none';
                     }
