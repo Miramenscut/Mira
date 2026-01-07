@@ -498,25 +498,32 @@
 
         .footer-logo { width: 120px; height: auto; margin-bottom: 25px; opacity: 0.9; }
         .footer-address { margin-bottom: 25px; line-height: 1.8; }
-        .slogan { font-family: 'Playfair Display', serif; font-style: italic; margin-bottom: 30px; color: #fff; font-size: 1.1rem; }
+        
+        /* SLOGAN STYLING */
+        .slogan { 
+            font-family: 'Playfair Display', serif; 
+            font-style: italic; 
+            margin-bottom: 20px; 
+            color: #fff; 
+            font-size: 1.1rem; 
+        }
+        
         .copyright { font-size: 0.7rem; text-transform: uppercase; opacity: 0.5; letter-spacing: 1px; }
 
         .col-center { text-align: center; padding: 0 10px; display: flex; flex-direction: column; align-items: center; }
         
-        /* Modifica Typography richiesta: Più grande del testo normale, ma proporzionato al logo */
         .footer-heading { 
             color: #fff; 
             text-transform: uppercase; 
             letter-spacing: 2px; 
             margin-bottom: 20px; 
-            font-size: 1.3rem; /* Aumentato */ 
+            font-size: 1.3rem; 
             font-weight: 600; 
         }
         
-        .about-text { line-height: 1.8; margin-bottom: 30px; max-width: 320px; }
+        .about-text { line-height: 1.8; margin-bottom: 20px; max-width: 320px; }
         
-        /* Social Group per tenerli insieme */
-        .social-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-bottom: 10px; }
+        .social-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-bottom: 10px; margin-top: 20px; }
 
         .social-link { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; border: 1px solid #333; padding: 12px 25px; transition: 0.3s; }
         .social-link:hover { background: #fff; color: #000; }
@@ -526,9 +533,11 @@
 
         .col-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
         .hours-box { border: 1px solid #333; padding: 25px; text-align: center; width: 100%; max-width: 300px; }
-        .hours-box span { display: block; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; color: #888; margin-bottom: 10px; }
-        .hours-box p { font-size: 0.9rem; color: #ccc; }
-        .hours-big { font-size: 1.2rem; color: #fff; font-weight: 600; margin-top: 5px; letter-spacing: 1px; }
+        .hours-box-title { display: block; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; color: #888; margin-bottom: 10px; }
+        .mobile-address-inside { display: none; }
+        .hours-wrapper { display: block; }
+        .days-text { font-size: 0.9rem; color: #ccc; display: block; margin-bottom: 5px; }
+        .time-text { font-size: 1.2rem; color: #fff; font-weight: 600; letter-spacing: 1px; display: block; }
 
         /* --- MEDIA QUERIES (RESPONSIVENESS) --- */
         @media (min-width: 768px) and (max-width: 1024px) {
@@ -549,22 +558,20 @@
             .grid-container { height: auto; flex-direction: column; }
             .grid-item { height: 280px; border-right: none; border-bottom: 1px solid #1a1a1a; }
             
-            #bg-tagli { background-position: center 50%; }
-	    #bg-salone { background-position: center 53%; }
+            #bg-tagli { background-position: center; }
+            #bg-salone { background-position: center 53%; }
 
-            /* --- FOOTER MOBILE (Reordered) --- */
+            /* --- FOOTER MOBILE --- */
             .footer-container { 
                 display: flex;
                 flex-direction: column;
-                align-items: center; /* Centra orizzontalmente tutti i figli */
+                align-items: center; 
                 text-align: center;
                 gap: 0;
             }
             
-            /* Smonta le colonne per riordinare i pezzi */
             .footer-col, .col-right { display: contents; }
 
-            /* Stile forzato per tutti gli elementi del footer su mobile */
             .footer-logo, .footer-address, .slogan, .copyright,
             .footer-heading, .about-text, .social-group,
             .hours-box {
@@ -575,30 +582,38 @@
                 max-width: 300px;
             }
 
-            /* ORDINE SPECIFICO */
-            /* 1. About */
+            .footer-address { display: none; } 
+            
+            /* Stile per indirizzo dentro box orari */
+            .mobile-address-inside { 
+                display: block; 
+                color: #ccc; 
+                margin-bottom: 15px; 
+                font-size: 0.95rem; 
+                line-height: 1.5; 
+            }
+
+            .hours-wrapper { display: block; }
+            .days-text { display: inline; font-size: 0.95rem; margin-right: 5px; }
+            .time-text { display: inline; font-size: 0.95rem; font-weight: normal; }
+
+            /* ORDINE REVISIONATO */
+            /* 1. About Title */
             .footer-heading { order: 1; margin-bottom: 15px; }
-            .about-text { order: 2; margin-bottom: 30px; }
-            
-            /* 2. Social (Stacked) */
-            .social-group { order: 3; justify-content: center; margin-bottom: 40px; }
-            
-            /* 3. Logo */
-            .footer-logo { order: 4; margin-bottom: 20px; width: 100px; }
-            
-            /* 4. Slogan */
-            .slogan { order: 5; margin-bottom: 40px; }
-            
-            /* 5. Via (Address) - Spostato SOPRA gli orari */
-            .footer-address { order: 6; margin-bottom: 20px; }
-
-            /* 6. Orari */
-            .hours-box { order: 7; margin-bottom: 40px; }
-            
+            /* 2. About Text */
+            .about-text { order: 2; margin-bottom: 10px; }
+            /* 3. Slogan (Ora sotto About) */
+            .slogan { order: 3; margin-bottom: 30px; }
+            /* 4. Social */
+            .social-group { order: 4; justify-content: center; margin-bottom: 40px; margin-top: 0; }
+            /* 5. Logo */
+            .footer-logo { order: 5; margin-bottom: 20px; width: 100px; }
+            /* 6. Box Orari (con via) */
+            .hours-box { order: 6; margin-bottom: 40px; }
             /* 7. Copyright */
-            .copyright { order: 8; margin-top: 10px; padding-bottom: 30px; }
+            .copyright { order: 7; margin-top: 10px; padding-bottom: 30px; }
 
-            /* ALTRI FIX MOBILE */
+            /* ALTRI FIX */
             .crew-content-container { 
                 flex-direction: column; 
                 align-items: center; 
@@ -607,7 +622,6 @@
             }
             .overlay-close-btn { top: 15px; right: 15px; background: rgba(0,0,0,0.8); }
 
-            /* CAROSELLO LOCATION MOBILE */
             .gallery-container {
                 display: flex;
                 align-items: center;
@@ -875,7 +889,6 @@
                     <p>Via Giulio Petroni 12</p>
                     <p>70124 Bari, Italia</p>
                 </div>
-                <p class="slogan">"Definire lo stile,<br>un taglio alla volta."</p>
                 <div class="copyright">
                     &copy; 2025 MIRA Men's Cut.<br>All Rights Reserved.<br>
                     <a href="legal.html" style="text-decoration: underline; color: #666; margin-top: 5px; display: inline-block;">Privacy & Termini</a>
@@ -887,6 +900,7 @@
                 <p class="about-text">
                     Un ambiente esclusivo dove la tradizione della barberia incontra l'estetica contemporanea. Precisione, cura e dettaglio.
                 </p>
+                <p class="slogan">"Definire lo stile,<br>un taglio alla volta."</p>
                 <div class="social-group">
                     <a href="https://www.instagram.com/miramenscut/" target="_blank" class="social-link">
                         <i class="fab fa-instagram"></i> Seguici su Instagram
@@ -899,9 +913,16 @@
             
             <div class="footer-col col-right">
                 <div class="hours-box">
-                    <span>Orari di Apertura</span>
-                    <p>Mar - Sab</p>
-                    <p class="hours-big">9:00 - 20:00</p>
+                    <span class="hours-box-title">Orari di Apertura</span>
+                    
+                    <div class="mobile-address-inside">
+                        Via Giulio Petroni 12<br>70124 Bari, Italia
+                    </div>
+
+                    <div class="hours-wrapper">
+                        <span class="days-text">Mar - Sab</span>
+                        <span class="time-text">9:00 - 20:00</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -930,15 +951,11 @@
             allVideos.forEach(vid => vid.pause());
         }
 
-        // --- JS LOGICA COMPLETA ---
         document.addEventListener('DOMContentLoaded', () => {
             
-            // 1. AUTO-PULIZIA FILE MANCANTI e FIX MAIUSCOLE/MINUSCOLE
             document.querySelectorAll('img').forEach(img => {
                 img.onerror = function() {
-                    // Contrassegna l'immagine come rotta per la lightbox
                     this.classList.add('broken');
-
                     if (this.src.endsWith('.jpg')) {
                         this.src = this.src.replace('.jpg', '.JPG');
                         this.onerror = function() {
@@ -959,7 +976,6 @@
                 };
             });
 
-            // 2. CHIUSURA CLICK OUTSIDE
             document.querySelectorAll('.overlay').forEach(overlay => {
                 overlay.addEventListener('click', function(e) {
                     if (e.target === this) {
@@ -968,7 +984,6 @@
                 });
             });
 
-            // 3. GESTIONE VIDEO
             const videos = document.querySelectorAll('video');
             videos.forEach(video => {
                 video.addEventListener('play', (event) => {
@@ -980,7 +995,6 @@
                 });
             });
 
-            // 4. GESTIONE LIGHTBOX DINAMICA (Esclude foto rotte/nascoste)
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             let currentGallery = []; 
@@ -990,11 +1004,9 @@
 
             allZoomableImages.forEach(img => {
                 img.onclick = (e) => {
-                    // Evita di aprire foto rotte
                     if(img.classList.contains('broken') || img.style.display === 'none') return;
 
                     const container = img.closest('.gallery-container, .portfolio-grid');
-                    // Seleziona solo le foto NON rotte di questo contenitore
                     currentGallery = Array.from(container.querySelectorAll('.zoomable:not(.broken)'));
                     
                     currentIndex = currentGallery.indexOf(img);
@@ -1033,7 +1045,6 @@
                 }
             }
 
-            // Swipe Mobile
             let touchStartX = 0;
             let touchEndX = 0;
 
