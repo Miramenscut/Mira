@@ -28,10 +28,67 @@
             line-height: 1.4;
         }
 
+        body.preloader-active { overflow: hidden; }
+
         a { text-decoration: none; color: white; transition: 0.3s; }
         ul { list-style: none; }
 
         .white-logo { filter: invert(1) brightness(100%); }
+
+        /* --- PRELOADER --- */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #preloader.hide-preloader {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .preloader-logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: invert(1);
+            animation: pulseLogo 2s infinite ease-in-out;
+        }
+
+        .loading-bar-container {
+            width: 200px;
+            height: 4px;
+            background-color: #222;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-bar-fill {
+            height: 100%;
+            width: 50%;
+            background-color: #fff;
+            position: absolute;
+            border-radius: 2px;
+            animation: loadingAnimation 1.5s infinite ease-in-out;
+        }
+
+        @keyframes loadingAnimation {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        
+        @keyframes pulseLogo {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.95); }
+        }
 
         /* --- HEADER --- */
         header {
@@ -94,6 +151,7 @@
             justify-content: center;
             width: 100%;
             padding: 0 20px;
+            padding-bottom: 80px; 
         }
 
         .hero-square-frame {
@@ -112,18 +170,32 @@
             letter-spacing: 8px;
             text-transform: uppercase;
             color: #e0e0e0;
-            margin-bottom: 20px;
+            margin-bottom: 10px; 
             font-weight: 300;
             margin-top: -30px; 
         }
 
+        .hero-address {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 2px;
+            margin-bottom: 0;
+            font-weight: 400;
+            cursor: pointer;
+        }
+        .hero-address:hover { color: #ccc; border-color: #ccc; }
+
         .scroll-down {
             position: absolute;
-            bottom: 30px;
+            bottom: 15px; /* SPOSTATO PIÙ IN BASSO (Prima era 30px) */
             opacity: 0.7;
             animation: bounce 2s infinite;
             cursor: pointer;
             padding: 20px;
+            z-index: 3;
         }
 
         @keyframes bounce {
@@ -232,21 +304,22 @@
             display: flex;
             flex-wrap: wrap;
             width: 100%;
-            height: 60vh; 
-            min-height: 500px;
+            height: 100vh; 
+            min-height: 800px;
         }
 
         .grid-item {
-            flex: 1;
-            min-width: 300px;
+            flex: 0 0 50%; 
+            width: 50%;
+            height: 50%; 
             position: relative;
-            height: 100%;
             overflow: hidden;
-            border-right: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
             cursor: pointer;
         }
 
-        .grid-item:last-child { border-right: none; }
+        .grid-item:nth-child(odd) { border-right: 1px solid #1a1a1a; }
+        .grid-item:nth-child(even) { border-right: none; }
 
         .grid-bg {
             position: absolute;
@@ -264,7 +337,10 @@
             }
         }
 
-        #bg-tagli { background-position: center center; }
+            #bg-tagli { background-position: center center; } /* Modificato */
+            #bg-salone { background-position: center 53%;     transform: scaleX(-1); } /* Modificato e specchio */
+            #bg-map { background-position: center 20%; } /* Modificato */
+
 
         .grid-content {
             position: absolute;
@@ -289,7 +365,7 @@
             color: #ccc;
         }
 
-        /* --- OVERLAY CONDIVISO (Base) --- */
+        /* --- OVERLAY & LIGHTBOX --- */
         .overlay {
             height: 100%;
             width: 100%;
@@ -307,9 +383,7 @@
             align-items: center;
             cursor: pointer; 
         }
-
         .overlay > * { cursor: default; }
-
         .overlay.open { opacity: 1; visibility: visible; }
 
         .overlay-close-btn {
@@ -327,14 +401,10 @@
             cursor: pointer;
         }
 
-        /* --- LIGHTBOX (GALLERIA FULL SCREEN) --- */
         .lightbox {
             position: fixed;
             z-index: 3000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-color: black;
             display: flex;
             justify-content: center;
@@ -344,20 +414,9 @@
             transition: opacity 0.3s;
             cursor: pointer;
         }
-
-        .lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .lightbox-img {
-            max-width: 95%;
-            max-height: 90vh;
-            object-fit: contain;
-            user-select: none;
-            cursor: default;
-        }
-
+        .lightbox.active { opacity: 1; visibility: visible; }
+        .lightbox-img { max-width: 95%; max-height: 90vh; object-fit: contain; user-select: none; cursor: default; }
+        
         .lightbox-nav {
             position: absolute;
             top: 50%;
@@ -373,18 +432,9 @@
         .lightbox-nav:hover { opacity: 1; }
         .prev-btn { left: 10px; }
         .next-btn { right: 10px; }
-        
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2.5rem;
-            color: white;
-            cursor: pointer;
-            z-index: 3002;
-        }
+        .lightbox-close { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; color: white; cursor: pointer; z-index: 3002; }
 
-        /* --- STILI CREW --- */
+        /* --- CONTENUTI OVERLAY --- */
         .crew-content-container {
             display: flex;
             justify-content: center;
@@ -395,7 +445,6 @@
             padding: 80px 20px 40px 20px;
             margin: auto 0; 
         }
-
         .crew-card {
             width: 280px;
             background-color: #111;
@@ -405,132 +454,57 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        .img-placeholder {
-            width: 100%;
-            height: 320px;
-            background-color: #1a1a1a;
-            position: relative;
-        }
-        
+        .img-placeholder { width: 100%; height: 320px; background-color: #1a1a1a; position: relative; }
         .crew-photo { width: 100%; height: 100%; object-fit: cover; }
         .crew-info { padding: 20px; }
         .crew-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #fff; margin-bottom: 5px; }
         .crew-role { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #888; }
 
-        /* --- STILI LOCATION --- */
+        /* Gallery */
         .gallery-container {
-            width: 100%;
-            max-width: 1200px;
-            padding: 100px 20px 40px 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-            margin: 0 auto;
+            width: 100%; max-width: 1200px; padding: 100px 20px 40px 20px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px; margin: 0 auto;
         }
-
         .gallery-item {
-            width: 100%;
-            aspect-ratio: 4/3; 
-            border-radius: 4px;
-            overflow: hidden;
-            background: #111;
-            flex: unset; 
-            max-width: unset;
-            height: unset;
-            margin: unset;
-            scroll-snap-align: unset;
-            cursor: pointer;
+            width: 100%; aspect-ratio: 4/3; border-radius: 4px; overflow: hidden;
+            background: #111; flex: unset; scroll-snap-align: unset; cursor: pointer;
         }
-        
         .gallery-spacer { display: none; }
-        
-        .zoomable {
-            width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; cursor: pointer;
-        }
-        
-        @media (hover: hover) {
-            .gallery-item:hover .zoomable { transform: scale(1.03); }
-        }
+        .zoomable { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; cursor: pointer; }
+        @media (hover: hover) { .gallery-item:hover .zoomable { transform: scale(1.03); } }
 
-        /* --- STILI PORTFOLIO --- */
+        /* Portfolio */
         .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
-            padding: 100px 20px 40px 20px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px; width: 100%; max-width: 1200px; padding: 100px 20px 40px 20px;
         }
-
-        .portfolio-item {
-            aspect-ratio: 9/16; 
-            background-color: #111;
-            overflow: hidden;
-            border-radius: 8px;
-            position: relative;
-        }
-
+        .portfolio-item { aspect-ratio: 9/16; background-color: #111; overflow: hidden; border-radius: 8px; position: relative; }
         .portfolio-item .zoomable { cursor: pointer; }
-
         .portfolio-media { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- FOOTER (Stile Base Desktop) --- */
-        footer {
-            background-color: #050505;
-            border-top: 1px solid #111;
-            padding: 60px 20px;
-            color: var(--gray-text);
-            font-size: 0.85rem;
+        .map-content-container {
+            width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; color: #fff;
         }
 
-        .footer-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap; 
-            max-width: 1200px;
-            margin: 0 auto;
-            gap: 40px;
-        }
-
+        /* --- FOOTER --- */
+        footer { background-color: #050505; border-top: 1px solid #111; padding: 60px 20px; color: var(--gray-text); font-size: 0.85rem; }
+        .footer-container { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; gap: 40px; }
         .footer-col { flex: 1; min-width: 280px; }
-
         .footer-logo { width: 120px; height: auto; margin-bottom: 25px; opacity: 0.9; }
-        .footer-address { margin-bottom: 25px; line-height: 1.8; }
-        
-        /* SLOGAN STYLING */
-        .slogan { 
-            font-family: 'Playfair Display', serif; 
-            font-style: italic; 
-            margin-bottom: 20px; 
-            color: #fff; 
-            font-size: 1.1rem; 
-        }
-        
+        .footer-address-link { color: inherit; text-decoration: none; display: block; margin-bottom: 25px; line-height: 1.8; cursor: pointer; }
+        .footer-address-link:hover { text-decoration: underline; color: #fff; }
+
+        .slogan { font-family: 'Playfair Display', serif; font-style: italic; margin-bottom: 20px; color: #fff; font-size: 1.1rem; }
         .copyright { font-size: 0.7rem; text-transform: uppercase; opacity: 0.5; letter-spacing: 1px; }
-
         .col-center { text-align: center; padding: 0 10px; display: flex; flex-direction: column; align-items: center; }
-        
-        .footer-heading { 
-            color: #fff; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            margin-bottom: 20px; 
-            font-size: 1.3rem; 
-            font-weight: 600; 
-        }
-        
+        .footer-heading { color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-size: 1.3rem; font-weight: 600; }
         .about-text { line-height: 1.8; margin-bottom: 20px; max-width: 320px; }
-        
         .social-group { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-bottom: 10px; margin-top: 20px; }
-
         .social-link { display: inline-flex; align-items: center; gap: 10px; color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; border: 1px solid #333; padding: 12px 25px; transition: 0.3s; }
         .social-link:hover { background: #fff; color: #000; }
-        
         .whatsapp-icon-footer { font-size: 1.8rem; color: #888; transition: 0.3s; padding: 10px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; height: 43px; width: 50px; }
         .whatsapp-icon-footer:hover { color: #25D366; background: #fff; border-color: #fff; }
-
         .col-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
         .hours-box { border: 1px solid #333; padding: 25px; text-align: center; width: 100%; max-width: 300px; }
         .hours-box-title { display: block; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; color: #888; margin-bottom: 10px; }
@@ -539,9 +513,10 @@
         .days-text { font-size: 0.9rem; color: #ccc; display: block; margin-bottom: 5px; }
         .time-text { font-size: 1.2rem; color: #fff; font-weight: 600; letter-spacing: 1px; display: block; }
 
-        /* --- MEDIA QUERIES (RESPONSIVENESS) --- */
+        /* --- RESPONSIVE --- */
         @media (min-width: 768px) and (max-width: 1024px) {
-            .grid-container { height: 45vh; min-height: 400px; }
+            .grid-container { height: auto; min-height: 800px; }
+            .grid-item { height: 400px; } 
             .grid-title { font-size: 1.5rem; }
             .pricing { padding: 60px 20px; }
             .hero-logo-img { width: 70%; }
@@ -551,102 +526,69 @@
         @media (max-width: 767px) {
             header { padding: 15px 20px; }
             .header-logo { height: 24px; }
-            
             .hero-square-frame { width: 85vw; }
             .subtitle { font-size: 0.8rem; letter-spacing: 5px; margin-top: -20px; }
             
+            /* Griglia Mobile: 1 colonna */
             .grid-container { height: auto; flex-direction: column; }
-            .grid-item { height: 280px; border-right: none; border-bottom: 1px solid #1a1a1a; }
-            
-            #bg-tagli { background-position: center; }
-            #bg-salone { background-position: center 53%; }
-
-            /* --- FOOTER MOBILE --- */
-            .footer-container { 
-                display: flex;
-                flex-direction: column;
-                align-items: center; 
-                text-align: center;
-                gap: 0;
+            .grid-item { 
+                flex: 0 0 auto; 
+                width: 100%; 
+                height: 280px; 
+                border-right: none; 
+                border-bottom: 1px solid #1a1a1a; 
             }
             
+
+            /* Footer Mobile */
+            .footer-container { flex-direction: column; align-items: center; text-align: center; gap: 0; }
             .footer-col, .col-right { display: contents; }
-
-            .footer-logo, .footer-address, .slogan, .copyright,
-            .footer-heading, .about-text, .social-group,
-            .hours-box {
-                text-align: center;
-                margin-left: auto;
-                margin-right: auto;
-                width: 100%;
-                max-width: 300px;
+            .footer-logo, .footer-address-link, .slogan, .copyright, .footer-heading, .about-text, .social-group, .hours-box {
+                text-align: center; margin-left: auto; margin-right: auto; width: 100%; max-width: 300px;
             }
-
-            .footer-address { display: none; } 
-            
-            /* Stile per indirizzo dentro box orari */
+            .footer-address-link { display: none; } 
             .mobile-address-inside { 
                 display: block; 
                 color: #ccc; 
                 margin-bottom: 15px; 
                 font-size: 0.95rem; 
-                line-height: 1.5; 
+                line-height: 1.5;
+                text-decoration: none; 
             }
+            .mobile-address-inside:hover { text-decoration: underline; color: #fff; }
 
             .hours-wrapper { display: block; }
             .days-text { display: inline; font-size: 0.95rem; margin-right: 5px; }
             .time-text { display: inline; font-size: 0.95rem; font-weight: normal; }
 
-            /* ORDINE REVISIONATO */
-            /* 1. About Title */
             .footer-heading { order: 1; margin-bottom: 15px; }
-            /* 2. About Text */
             .about-text { order: 2; margin-bottom: 10px; }
-            /* 3. Slogan (Ora sotto About) */
             .slogan { order: 3; margin-bottom: 30px; }
-            /* 4. Social */
             .social-group { order: 4; justify-content: center; margin-bottom: 40px; margin-top: 0; }
-            /* 5. Logo */
             .footer-logo { order: 5; margin-bottom: 20px; width: 100px; }
-            /* 6. Box Orari (con via) */
             .hours-box { order: 6; margin-bottom: 40px; }
-            /* 7. Copyright */
             .copyright { order: 7; margin-top: 10px; padding-bottom: 30px; }
 
-            /* ALTRI FIX */
-            .crew-content-container { 
-                flex-direction: column; 
-                align-items: center; 
-                padding-top: 140px; 
-                margin: 0;
-            }
+            .crew-content-container { flex-direction: column; align-items: center; padding-top: 140px; margin: 0; }
             .overlay-close-btn { top: 15px; right: 15px; background: rgba(0,0,0,0.8); }
 
             .gallery-container {
-                display: flex;
-                align-items: center;
-                padding: 80px 0;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                width: 100%;
-                max-width: unset;
-                margin: 0;
+                display: flex; align-items: center; padding: 80px 0; overflow-x: auto;
+                scroll-snap-type: x mandatory; width: 100%; max-width: unset; margin: 0;
             }
-            
-            .gallery-item {
-                flex: 0 0 80%;
-                max-width: 600px;
-                height: 60vh;
-                margin: 0 15px;
-                scroll-snap-align: center;
-                aspect-ratio: unset;
-            }
-
+            .gallery-item { flex: 0 0 80%; max-width: 600px; height: 60vh; margin: 0 15px; scroll-snap-align: center; aspect-ratio: unset; }
             .gallery-spacer { display: block; flex: 0 0 10vw; }
         }
     </style>
 </head>
-<body>
+<body class="preloader-active">
+
+    <div id="preloader">
+        <img src="logo.svg" alt="MIRA" class="preloader-logo">
+        <div class="loading-bar-container">
+            <div class="loading-bar-fill"></div>
+        </div>
+    </div>
 
     <header>
         <img src="logo.svg" alt="MIRA Logo" class="header-logo white-logo">
@@ -660,6 +602,7 @@
             </div>
             
             <p class="subtitle">Bari</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Via+Giulio+Petroni+12+Bari" target="_blank" class="hero-address">Via Giulio Petroni 12</a>
             
             <a href="#servizi" class="scroll-down">
                 <i class="fas fa-chevron-down" style="color: white;"></i>
@@ -670,107 +613,56 @@
     <section class="pricing" id="servizi">
         <div class="pricing-container">
             <h2 class="section-title">Servizi</h2>
-            
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header">
-                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio con Shampoo</div>
-                </div>
-                <div class="service-desc">
-                    Servizio di taglio compreso di shampoo prima e dopo, eseguito a macchinetta con styling incluso.
-                </div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio con Shampoo</div></div>
+                <div class="service-desc">Servizio di taglio compreso di shampoo prima e dopo, eseguito a macchinetta con styling incluso.</div>
             </div>
-
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header">
-                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio Pettine e Forbici</div>
-                </div>
-                <div class="service-desc">
-                    Servizio di taglio compreso di shampoo e balsamo prima e dopo, eseguito a forbici con rifinitura a rasoio e finish styling incluso.
-                </div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio Pettine e Forbici</div></div>
+                <div class="service-desc">Servizio di taglio compreso di shampoo e balsamo prima e dopo, eseguito a forbici con rifinitura a rasoio e finish styling incluso.</div>
             </div>
-
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header">
-                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio Bambino</div>
-                </div>
-                <div class="service-desc">
-                    Servizio di taglio compreso di shampoo riservato a ragazzi 0 - 15 anni.
-                </div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio Bambino</div></div>
+                <div class="service-desc">Servizio di taglio compreso di shampoo riservato a ragazzi 0 - 15 anni.</div>
             </div>
-
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header">
-                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Barba / Rasatura Tradizionale</div>
-                </div>
-                <div class="service-desc">
-                    Servizio di rasatura barba comprensivo di: crema "pre-barba", panno caldo pre rasatura e panno freddo post rasatura.
-                </div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Barba / Rasatura Tradizionale</div></div>
+                <div class="service-desc">Servizio di rasatura barba comprensivo di: crema "pre-barba", panno caldo pre rasatura e panno freddo post rasatura.</div>
             </div>
-
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header">
-                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Barba Lunga</div>
-                </div>
-                <div class="service-desc">
-                    Servizio che include: detersione barba, panno caldo, asciugatura, modellatura, rasatura e panno freddo post rasatura.
-                </div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Barba Lunga</div></div>
+                <div class="service-desc">Servizio che include: detersione barba, panno caldo, asciugatura, modellatura, rasatura e panno freddo post rasatura.</div>
             </div>
-
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header">
-                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Ritual Barba</div>
-                </div>
-                <div class="service-desc">
-                    Servizio che include: detersione barba, panno caldo pre rasatura e panno freddo post rasatura.
-                </div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Ritual Barba</div></div>
+                <div class="service-desc">Servizio che include: detersione barba, panno caldo pre rasatura e panno freddo post rasatura.</div>
             </div>
-
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header">
-                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Air Oiling / Anti Caduta</div>
-                </div>
-                <div class="service-desc">
-                    Trattamento agli olii essenziali per cura della cute.
-                </div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Air Oiling / Anti Caduta</div></div>
+                <div class="service-desc">Trattamento agli olii essenziali per cura della cute.</div>
             </div>
-
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header">
-                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Trattamento Purificante</div>
-                </div>
-                <div class="service-desc">
-                    Trattamento scrub cute + lozione.
-                </div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Trattamento Purificante</div></div>
+                <div class="service-desc">Trattamento scrub cute + lozione.</div>
             </div>
-
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header">
-                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Trattamento Viso</div>
-                </div>
-                <div class="service-desc">
-                    Trattamento specifico che comprende: detersione, panno caldo, applicazione maschera, applicazione siero e crema.
-                </div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Trattamento Viso</div></div>
+                <div class="service-desc">Trattamento specifico che comprende: detersione, panno caldo, applicazione maschera, applicazione siero e crema.</div>
             </div>
-
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header">
-                    <div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Sopracciglia</div>
-                </div>
-                <div class="service-desc">
-                    Trattamento estetico di pulizia della forma con pinzetta.
-                </div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Sopracciglia</div></div>
+                <div class="service-desc">Trattamento estetico di pulizia della forma con pinzetta.</div>
             </div>
-
         </div>
     </section>
 
     <section class="visual-section">
         <div class="grid-container">
             
-            <div class="grid-item" onclick="openOverlay('locationOverlay')">
+            <div class="grid-item" onclick="openOverlay('galleryOverlay')">
                 <div class="grid-bg" id="bg-salone" style="background-image: url('img-salone.jpg');"></div>
                 <div class="grid-content">
-                    <h3 class="grid-title">Location</h3>
+                    <h3 class="grid-title">Gallery</h3>
                     <span class="grid-subtitle">Il Salone</span>
                 </div>
             </div>
@@ -791,15 +683,21 @@
                 </div>
             </div>
 
+            <div class="grid-item" onclick="openOverlay('mapOverlay')">
+                <div class="grid-bg" id="bg-map" style="background-image: url('img-map.jpg');"></div>
+                <div class="grid-content">
+                    <h3 class="grid-title">Location</h3>
+                    <span class="grid-subtitle">Dove ci troviamo</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <div id="locationOverlay" class="overlay">
-        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('locationOverlay')">&times;</a>
-        
+    <div id="galleryOverlay" class="overlay">
+        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('galleryOverlay')">×</a>
         <div class="gallery-container">
             <div class="gallery-spacer"></div>
-            
             <div class="gallery-item"><img src="salone1.jpg" class="zoomable"></div>
             <div class="gallery-item"><img src="salone2.jpg" class="zoomable"></div>
             <div class="gallery-item"><img src="salone3.jpg" class="zoomable"></div>
@@ -816,68 +714,58 @@
             <div class="gallery-item"><img src="salone14.jpg" class="zoomable"></div>
             <div class="gallery-item"><img src="salone15.jpg" class="zoomable"></div>
             <div class="gallery-item"><img src="salone16.jpg" class="zoomable"></div>
-
             <div class="gallery-spacer"></div>
         </div>
     </div>
 
     <div id="lightbox" class="lightbox">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <div class="lightbox-nav prev-btn" onclick="changeImage(-1)">&#10094;</div>
+        <span class="lightbox-close" onclick="closeLightbox()">×</span>
+        <div class="lightbox-nav prev-btn" onclick="changeImage(-1)">❮</div>
         <img id="lightbox-img" class="lightbox-img" src="">
-        <div class="lightbox-nav next-btn" onclick="changeImage(1)">&#10095;</div>
+        <div class="lightbox-nav next-btn" onclick="changeImage(1)">❯</div>
     </div>
 
     <div id="portfolioOverlay" class="overlay">
-        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('portfolioOverlay')">&times;</a>
-        
+        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('portfolioOverlay')">×</a>
         <div class="portfolio-grid">
-            
-            <div class="portfolio-item">
-                <video class="portfolio-media" controls playsinline preload="metadata">
-                    <source src="taglio1.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="portfolio-item">
-                <video class="portfolio-media" controls playsinline preload="metadata">
-                    <source src="taglio2.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="portfolio-item">
-                <video class="portfolio-media" controls playsinline preload="metadata">
-                    <source src="taglio3.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="portfolio-item">
-                <video class="portfolio-media" controls playsinline preload="metadata">
-                    <source src="taglio4.mp4" type="video/mp4">
-                </video>
-            </div>
-
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio1.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio2.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio3.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio4.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio5.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio6.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio7.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio8.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio9.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio10.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio11.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio12.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio13.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio14.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><video class="portfolio-media" controls playsinline preload="metadata"><source src="taglio15.mp4" type="video/mp4"></video></div>
+            <div class="portfolio-item"><img src="taglio-foto1.jpg" class="portfolio-media zoomable"></div>
+            <div class="portfolio-item"><img src="taglio-foto2.jpg" class="portfolio-media zoomable"></div>
         </div>
     </div>
 
     <div id="crewOverlay" class="overlay">
-        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('crewOverlay')">&times;</a>
+        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('crewOverlay')">×</a>
         <div class="crew-content-container">
             <div class="crew-card">
-                <div class="img-placeholder">
-                    <img src="fabio.jpg" alt="Fabio" class="crew-photo">
-                </div>
-                <div class="crew-info">
-                    <h3 class="crew-name">Fabio</h3>
-                    <p class="crew-role">Master Barber</p>
-                </div>
+                <div class="img-placeholder"><img src="fabio.jpg" alt="Fabio" class="crew-photo"></div>
+                <div class="crew-info"><h3 class="crew-name">Fabio</h3><p class="crew-role">Master Barber</p></div>
             </div>
             <div class="crew-card">
-                <div class="img-placeholder">
-                    <img src="giusy.jpg" alt="Giusy" class="crew-photo">
-                </div>
-                <div class="crew-info">
-                    <h3 class="crew-name">Giusy</h3>
-                    <p class="crew-role">Senior Stylist</p>
-                </div>
+                <div class="img-placeholder"><img src="giusy.jpg" alt="Giusy" class="crew-photo"></div>
+                <div class="crew-info"><h3 class="crew-name">Giusy</h3><p class="crew-role">Senior Stylist</p></div>
             </div>
+        </div>
+    </div>
+
+    <div id="mapOverlay" class="overlay">
+        <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('mapOverlay')">×</a>
+        <div class="map-content-container">
+            <h2>Coming Soon...</h2>
         </div>
     </div>
 
@@ -885,12 +773,11 @@
         <div class="footer-container">
             <div class="footer-col">
                 <img src="logo.svg" alt="MIRA Logo" class="footer-logo white-logo">
-                <div class="footer-address">
-                    <p>Via Giulio Petroni 12</p>
-                    <p>70124 Bari, Italia</p>
-                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Via+Giulio+Petroni+12+Bari" target="_blank" class="footer-address-link">
+                    Via Giulio Petroni 12<br>70124 Bari, Italia
+                </a>
                 <div class="copyright">
-                    &copy; 2025 MIRA Men's Cut.<br>All Rights Reserved.<br>
+                    © 2025 MIRA Men's Cut.<br>All Rights Reserved.<br>
                     <a href="legal.html" style="text-decoration: underline; color: #666; margin-top: 5px; display: inline-block;">Privacy & Termini</a>
                 </div>
             </div>
@@ -915,9 +802,9 @@
                 <div class="hours-box">
                     <span class="hours-box-title">Orari di Apertura</span>
                     
-                    <div class="mobile-address-inside">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Via+Giulio+Petroni+12+Bari" target="_blank" class="mobile-address-inside">
                         Via Giulio Petroni 12<br>70124 Bari, Italia
-                    </div>
+                    </a>
 
                     <div class="hours-wrapper">
                         <span class="days-text">Mar - Sab</span>
@@ -951,8 +838,13 @@
             allVideos.forEach(vid => vid.pause());
         }
 
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.classList.add('hide-preloader');
+            document.body.classList.remove('preloader-active');
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
-            
             document.querySelectorAll('img').forEach(img => {
                 img.onerror = function() {
                     this.classList.add('broken');
