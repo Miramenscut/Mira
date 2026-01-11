@@ -103,7 +103,29 @@
             background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
         }
 
+        .header-left { display: flex; align-items: center; gap: 20px; }
         .header-logo { height: 28px; width: auto; display: block; }
+
+        /* LANGUAGE SWITCHER */
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            font-size: 0.75rem;
+            color: #888;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .lang-btn:hover { color: #fff; }
+        .lang-btn.active { color: #fff; font-weight: 700; border-bottom: 1px solid #fff; }
+
+        .header-right { display: flex; align-items: center; gap: 20px; }
 
         .btn-prenota {
             background: rgba(255,255,255,0.1);
@@ -190,7 +212,7 @@
 
         .scroll-down {
             position: absolute;
-            bottom: 15px; /* SPOSTATO PIÙ IN BASSO (Prima era 30px) */
+            bottom: 5px; 
             opacity: 0.7;
             animation: bounce 2s infinite;
             cursor: pointer;
@@ -337,10 +359,9 @@
             }
         }
 
-            #bg-tagli { background-position: center center; } /* Modificato */
-            #bg-salone { background-position: center 53%;     transform: scaleX(-1); } /* Modificato e specchio */
-            #bg-map { background-position: center 20%; } /* Modificato */
-
+        #bg-tagli { background-position: center center; }
+        #bg-salone { background-position: center center; transform: scaleX(-1); }
+        #bg-map { background-position: center center; }
 
         .grid-content {
             position: absolute;
@@ -483,9 +504,27 @@
         .portfolio-item .zoomable { cursor: pointer; }
         .portfolio-media { width: 100%; height: 100%; object-fit: cover; }
 
+        /* Map Overlay Styling */
         .map-content-container {
-            width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; color: #fff;
+            width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 80px 20px 40px 20px; text-align: center; color: #fff;
         }
+        .map-wrapper {
+            max-width: 600px; width: 100%; background: rgba(17, 17, 17, 0.8);
+            border: 1px solid #333; border-radius: 8px; padding: 40px; backdrop-filter: blur(10px);
+        }
+        .map-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px; color: #fff; }
+        .map-desc { font-size: 1rem; line-height: 1.8; color: #ccc; margin-bottom: 40px; font-weight: 300; }
+        .map-buttons { display: flex; gap: 15px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+        .map-btn {
+            padding: 15px 30px; border: 1px solid #fff; color: #fff; text-transform: uppercase;
+            font-size: 0.8rem; letter-spacing: 2px; border-radius: 4px; display: inline-flex;
+            align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .map-btn:hover { background: #fff; color: #000; }
+        .parking-box { border-top: 1px solid #333; padding-top: 30px; margin-top: 20px; }
+        .parking-title { display: block; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 15px; color: #fff; font-weight: 600; }
+        .parking-desc { font-size: 0.9rem; color: #999; margin-bottom: 20px; }
 
         /* --- FOOTER --- */
         footer { background-color: #050505; border-top: 1px solid #111; padding: 60px 20px; color: var(--gray-text); font-size: 0.85rem; }
@@ -529,7 +568,6 @@
             .hero-square-frame { width: 85vw; }
             .subtitle { font-size: 0.8rem; letter-spacing: 5px; margin-top: -20px; }
             
-            /* Griglia Mobile: 1 colonna */
             .grid-container { height: auto; flex-direction: column; }
             .grid-item { 
                 flex: 0 0 auto; 
@@ -539,8 +577,10 @@
                 border-bottom: 1px solid #1a1a1a; 
             }
             
+            #bg-tagli { background-position: center center; } 
+            #bg-salone { background-position: center 53%; } 
+            #bg-map { background-position: center 60%; } 
 
-            /* Footer Mobile */
             .footer-container { flex-direction: column; align-items: center; text-align: center; gap: 0; }
             .footer-col, .col-right { display: contents; }
             .footer-logo, .footer-address-link, .slogan, .copyright, .footer-heading, .about-text, .social-group, .hours-box {
@@ -578,6 +618,9 @@
             }
             .gallery-item { flex: 0 0 80%; max-width: 600px; height: 60vh; margin: 0 15px; scroll-snap-align: center; aspect-ratio: unset; }
             .gallery-spacer { display: block; flex: 0 0 10vw; }
+            
+            .map-wrapper { padding: 30px 20px; }
+            .map-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -591,8 +634,19 @@
     </div>
 
     <header>
-        <img src="logo.svg" alt="MIRA Logo" class="header-logo white-logo">
-        <a href="https://wa.me/393762061609?text=Ciao,%20vorrei%20prenotare%20un%20appuntamento%20presso%20MIRA." class="btn-prenota">Prenota</a>
+        <div class="header-left">
+            <img src="logo.svg" alt="MIRA Logo" class="header-logo white-logo">
+        </div>
+
+        <div class="header-right">
+            <div class="lang-switch">
+                <span class="lang-btn active" onclick="setLanguage('it')">IT</span> |
+                <span class="lang-btn" onclick="setLanguage('en')">EN</span> |
+                <span class="lang-btn" onclick="setLanguage('es')">ES</span>
+            </div>
+            
+            <a href="https://wa.me/393762061609" class="btn-prenota" data-i18n="bookBtn">Prenota</a>
+        </div>
     </header>
 
     <section class="hero">
@@ -612,46 +666,55 @@
 
     <section class="pricing" id="servizi">
         <div class="pricing-container">
-            <h2 class="section-title">Servizi</h2>
+            <h2 class="section-title" data-i18n="servicesTitle">Servizi</h2>
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio con Shampoo</div></div>
-                <div class="service-desc">Servizio di taglio compreso di shampoo prima e dopo, eseguito a macchinetta con styling incluso.</div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> <span data-i18n="srv1_name">Taglio con Shampoo</span></div></div>
+                <div class="service-desc" data-i18n="srv1_desc">Servizio di taglio compreso di shampoo prima e dopo, eseguito a macchinetta con styling incluso.</div>
             </div>
+
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio Pettine e Forbici</div></div>
-                <div class="service-desc">Servizio di taglio compreso di shampoo e balsamo prima e dopo, eseguito a forbici con rifinitura a rasoio e finish styling incluso.</div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> <span data-i18n="srv2_name">Taglio Pettine e Forbici</span></div></div>
+                <div class="service-desc" data-i18n="srv2_desc">Servizio di taglio compreso di shampoo e balsamo prima e dopo, eseguito a forbici con rifinitura a rasoio e finish styling incluso.</div>
             </div>
+
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Taglio Bambino</div></div>
-                <div class="service-desc">Servizio di taglio compreso di shampoo riservato a ragazzi 0 - 15 anni.</div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> <span data-i18n="srv3_name">Taglio Bambino</span></div></div>
+                <div class="service-desc" data-i18n="srv3_desc">Servizio di taglio compreso di shampoo riservato a ragazzi 0 - 15 anni.</div>
             </div>
+
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Barba / Rasatura Tradizionale</div></div>
-                <div class="service-desc">Servizio di rasatura barba comprensivo di: crema "pre-barba", panno caldo pre rasatura e panno freddo post rasatura.</div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> <span data-i18n="srv4_name">Barba / Rasatura Tradizionale</span></div></div>
+                <div class="service-desc" data-i18n="srv4_desc">Servizio di rasatura barba comprensivo di: crema "pre-barba", panno caldo pre rasatura e panno freddo post rasatura.</div>
             </div>
+
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Barba Lunga</div></div>
-                <div class="service-desc">Servizio che include: detersione barba, panno caldo, asciugatura, modellatura, rasatura e panno freddo post rasatura.</div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> <span data-i18n="srv5_name">Barba Lunga</span></div></div>
+                <div class="service-desc" data-i18n="srv5_desc">Servizio che include: detersione barba, panno caldo, asciugatura, modellatura, rasatura e panno freddo post rasatura.</div>
             </div>
+
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Ritual Barba</div></div>
-                <div class="service-desc">Servizio che include: detersione barba, panno caldo pre rasatura e panno freddo post rasatura.</div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> <span data-i18n="srv6_name">Ritual Barba</span></div></div>
+                <div class="service-desc" data-i18n="srv6_desc">Servizio che include: detersione barba, panno caldo pre rasatura e panno freddo post rasatura.</div>
             </div>
+
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Air Oiling / Anti Caduta</div></div>
-                <div class="service-desc">Trattamento agli olii essenziali per cura della cute.</div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> <span data-i18n="srv7_name">Air Oiling / Anti Caduta</span></div></div>
+                <div class="service-desc" data-i18n="srv7_desc">Trattamento agli olii essenziali per cura della cute.</div>
             </div>
+
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Trattamento Purificante</div></div>
-                <div class="service-desc">Trattamento scrub cute + lozione.</div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> <span data-i18n="srv8_name">Trattamento Purificante</span></div></div>
+                <div class="service-desc" data-i18n="srv8_desc">Trattamento scrub cute + lozione.</div>
             </div>
+
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Trattamento Viso</div></div>
-                <div class="service-desc">Trattamento specifico che comprende: detersione, panno caldo, applicazione maschera, applicazione siero e crema.</div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> <span data-i18n="srv9_name">Trattamento Viso</span></div></div>
+                <div class="service-desc" data-i18n="srv9_desc">Trattamento specifico che comprende: detersione, panno caldo, applicazione maschera, applicazione siero e crema.</div>
             </div>
+
             <div class="service-item" onclick="toggleService(this)">
-                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> Sopracciglia</div></div>
-                <div class="service-desc">Trattamento estetico di pulizia della forma con pinzetta.</div>
+                <div class="service-header"><div class="service-name"><i class="fas fa-chevron-right toggle-icon"></i> <span data-i18n="srv10_name">Sopracciglia</span></div></div>
+                <div class="service-desc" data-i18n="srv10_desc">Trattamento estetico di pulizia della forma con pinzetta.</div>
             </div>
         </div>
     </section>
@@ -662,32 +725,32 @@
             <div class="grid-item" onclick="openOverlay('galleryOverlay')">
                 <div class="grid-bg" id="bg-salone" style="background-image: url('img-salone.jpg');"></div>
                 <div class="grid-content">
-                    <h3 class="grid-title">Gallery</h3>
-                    <span class="grid-subtitle">Il Salone</span>
+                    <h3 class="grid-title" data-i18n="grid_gallery">Gallery</h3>
+                    <span class="grid-subtitle" data-i18n="grid_gallery_sub">Il Salone</span>
                 </div>
             </div>
 
             <div class="grid-item" onclick="openOverlay('portfolioOverlay')">
                 <div class="grid-bg" id="bg-tagli" style="background-image: url('img-tagli.jpg');"></div>
                 <div class="grid-content">
-                    <h3 class="grid-title">Portfolio</h3>
-                    <span class="grid-subtitle">I Nostri Tagli</span>
+                    <h3 class="grid-title" data-i18n="grid_portfolio">Portfolio</h3>
+                    <span class="grid-subtitle" data-i18n="grid_portfolio_sub">I Nostri Tagli</span>
                 </div>
             </div>
 
             <div class="grid-item" onclick="openOverlay('crewOverlay')">
                 <div class="grid-bg" style="background-image: url('img-crew.jpg');"></div>
                 <div class="grid-content">
-                    <h3 class="grid-title">The Crew</h3>
-                    <span class="grid-subtitle">I Nostri Barbieri</span>
+                    <h3 class="grid-title" data-i18n="grid_crew">The Crew</h3>
+                    <span class="grid-subtitle" data-i18n="grid_crew_sub">I Nostri Barbieri</span>
                 </div>
             </div>
 
             <div class="grid-item" onclick="openOverlay('mapOverlay')">
                 <div class="grid-bg" id="bg-map" style="background-image: url('img-map.jpg');"></div>
                 <div class="grid-content">
-                    <h3 class="grid-title">Location</h3>
-                    <span class="grid-subtitle">Dove ci troviamo</span>
+                    <h3 class="grid-title" data-i18n="grid_location">Location</h3>
+                    <span class="grid-subtitle" data-i18n="grid_location_sub">Dove ci troviamo</span>
                 </div>
             </div>
 
@@ -765,7 +828,29 @@
     <div id="mapOverlay" class="overlay">
         <a href="javascript:void(0)" class="overlay-close-btn" onclick="closeOverlay('mapOverlay')">×</a>
         <div class="map-content-container">
-            <h2>Coming Soon...</h2>
+            <div class="map-wrapper">
+                <h3 class="map-title" data-i18n="map_title">Dove Siamo</h3>
+                <p class="map-desc" data-i18n="map_desc">
+                    Situato nel cuore pulsante di Bari, a pochi passi dalla Stazione Centrale e dal Policlinico, MIRA è facilmente raggiungibile sia dal centro che dai quartieri Picone e Carrassi. Un angolo di stile urbano perfettamente collegato.
+                </p>
+                
+                <div class="map-buttons">
+                    <a href="https://www.google.com/maps/search/?api=1&query=MIRA+Mens+Cut+Bari" target="_blank" class="map-btn">
+                        <i class="fab fa-google"></i> Google Maps
+                    </a>
+                    <a href="https://waze.com/ul?q=MIRA+Mens+Cut+Bari" target="_blank" class="map-btn">
+                        <i class="fab fa-waze"></i> Waze
+                    </a>
+                </div>
+
+                <div class="parking-box">
+                    <span class="parking-title" data-i18n="parking_title">Convenzione Parcheggio</span>
+                    <p class="parking-desc" data-i18n="parking_desc">Per garantirti il massimo comfort, abbiamo una convenzione esclusiva con un garage nelle vicinanze.</p>
+                    <a href="https://maps.app.goo.gl/Z9gMgVC3qV6opbwG6" target="_blank" class="map-btn" style="border-color: #999; color: #ccc;">
+                        <i class="fas fa-parking"></i> <span data-i18n="garage_btn">Vedi Garage</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -783,14 +868,14 @@
             </div>
             
             <div class="footer-col col-center">
-                <h4 class="footer-heading">About Mira</h4>
-                <p class="about-text">
+                <h4 class="footer-heading" data-i18n="footer_about_title">About Mira</h4>
+                <p class="about-text" data-i18n="footer_about_text">
                     Un ambiente esclusivo dove la tradizione della barberia incontra l'estetica contemporanea. Precisione, cura e dettaglio.
                 </p>
-                <p class="slogan">"Definire lo stile,<br>un taglio alla volta."</p>
+                <p class="slogan" data-i18n="slogan">"Definire lo stile,<br>un taglio alla volta."</p>
                 <div class="social-group">
                     <a href="https://www.instagram.com/miramenscut/" target="_blank" class="social-link">
-                        <i class="fab fa-instagram"></i> Seguici su Instagram
+                        <i class="fab fa-instagram"></i> <span data-i18n="follow_ig">Seguici su Instagram</span>
                     </a>
                     <a href="https://wa.me/393762061609?text=Ciao,%20vorrei%20prenotare%20un%20appuntamento%20presso%20MIRA." class="whatsapp-icon-footer">
                         <i class="fab fa-whatsapp"></i>
@@ -800,14 +885,14 @@
             
             <div class="footer-col col-right">
                 <div class="hours-box">
-                    <span class="hours-box-title">Orari di Apertura</span>
+                    <span class="hours-box-title" data-i18n="opening_hours">Orari di Apertura</span>
                     
                     <a href="https://www.google.com/maps/search/?api=1&query=Via+Giulio+Petroni+12+Bari" target="_blank" class="mobile-address-inside">
                         Via Giulio Petroni 12<br>70124 Bari, Italia
                     </a>
 
                     <div class="hours-wrapper">
-                        <span class="days-text">Mar - Sab</span>
+                        <span class="days-text" data-i18n="days">Mar - Sab</span>
                         <span class="time-text">9:00 - 20:00</span>
                     </div>
                 </div>
@@ -816,6 +901,124 @@
     </footer>
 
     <script>
+        // --- TRANSLATION LOGIC ---
+        const translations = {
+            it: {
+                bookBtn: "Prenota",
+                servicesTitle: "Servizi",
+                srv1_name: "Taglio con Shampoo", srv1_desc: "Servizio di taglio compreso di shampoo prima e dopo, eseguito a macchinetta con styling incluso.",
+                srv2_name: "Taglio Pettine e Forbici", srv2_desc: "Servizio di taglio compreso di shampoo e balsamo prima e dopo, eseguito a forbici con rifinitura a rasoio e finish styling incluso.",
+                srv3_name: "Taglio Bambino", srv3_desc: "Servizio di taglio compreso di shampoo riservato a ragazzi 0 - 15 anni.",
+                srv4_name: "Barba / Rasatura Tradizionale", srv4_desc: "Servizio di rasatura barba comprensivo di: crema \"pre-barba\", panno caldo pre rasatura e panno freddo post rasatura.",
+                srv5_name: "Barba Lunga", srv5_desc: "Servizio che include: detersione barba, panno caldo, asciugatura, modellatura, rasatura e panno freddo post rasatura.",
+                srv6_name: "Ritual Barba", srv6_desc: "Servizio che include: detersione barba, panno caldo pre rasatura e panno freddo post rasatura.",
+                srv7_name: "Air Oiling / Anti Caduta", srv7_desc: "Trattamento agli olii essenziali per cura della cute.",
+                srv8_name: "Trattamento Purificante", srv8_desc: "Trattamento scrub cute + lozione.",
+                srv9_name: "Trattamento Viso", srv9_desc: "Trattamento specifico che comprende: detersione, panno caldo, applicazione maschera, applicazione siero e crema.",
+                srv10_name: "Sopracciglia", srv10_desc: "Trattamento estetico di pulizia della forma con pinzetta.",
+                
+                grid_gallery: "Gallery", grid_gallery_sub: "Il Salone",
+                grid_portfolio: "Portfolio", grid_portfolio_sub: "I Nostri Tagli",
+                grid_crew: "The Crew", grid_crew_sub: "I Nostri Barbieri",
+                grid_location: "Location", grid_location_sub: "Dove ci troviamo",
+
+                map_title: "Dove Siamo",
+                map_desc: "Situato nel cuore pulsante di Bari, a pochi passi dalla Stazione Centrale e dal Policlinico, MIRA è facilmente raggiungibile sia dal centro che dai quartieri Picone e Carrassi. Un angolo di stile urbano perfettamente collegato.",
+                parking_title: "Convenzione Parcheggio",
+                parking_desc: "Per garantirti il massimo comfort, abbiamo una convenzione esclusiva con un garage nelle vicinanze.",
+                garage_btn: "Vedi Garage",
+
+                footer_about_title: "About Mira",
+                footer_about_text: "Un ambiente esclusivo dove la tradizione della barberia incontra l'estetica contemporanea. Precisione, cura e dettaglio.",
+                slogan: "\"Definire lo stile,<br>un taglio alla volta.\"",
+                follow_ig: "Seguici su Instagram",
+                opening_hours: "Orari di Apertura",
+                days: "Mar - Sab"
+            },
+            en: {
+                bookBtn: "Book Now",
+                servicesTitle: "Services",
+                srv1_name: "Haircut & Shampoo", srv1_desc: "Haircut service including shampoo before and after, performed with clippers, styling included.",
+                srv2_name: "Scissor Cut", srv2_desc: "Haircut service including shampoo and conditioner, performed with scissors, razor finishing, and styling included.",
+                srv3_name: "Kids Cut", srv3_desc: "Haircut service including shampoo reserved for ages 0 - 15.",
+                srv4_name: "Beard / Traditional Shave", srv4_desc: "Shaving service including pre-shave cream, hot towel, and cold towel post-shave.",
+                srv5_name: "Long Beard Trim", srv5_desc: "Service including beard cleansing, hot towel, drying, shaping, shaving, and cold towel post-shave.",
+                srv6_name: "Beard Ritual", srv6_desc: "Premium service including deep cleansing, hot towel pre-shave, and cold towel post-shave.",
+                srv7_name: "Air Oiling / Anti-Hair Loss", srv7_desc: "Essential oil treatment for scalp care.",
+                srv8_name: "Purifying Treatment", srv8_desc: "Scalp scrub treatment + lotion.",
+                srv9_name: "Facial Treatment", srv9_desc: "Specific treatment including cleansing, hot towel, mask application, serum, and cream.",
+                srv10_name: "Eyebrows", srv10_desc: "Aesthetic shaping and cleaning with tweezers.",
+
+                grid_gallery: "Gallery", grid_gallery_sub: "The Salon",
+                grid_portfolio: "Portfolio", grid_portfolio_sub: "Our Cuts",
+                grid_crew: "The Crew", grid_crew_sub: "Our Barbers",
+                grid_location: "Location", grid_location_sub: "Where to find us",
+
+                map_title: "Where We Are",
+                map_desc: "Located in the beating heart of Bari, just steps from the Central Station and the Policlinico, MIRA is easily accessible from the city center, Picone, and Carrassi districts. An urban style corner perfectly connected.",
+                parking_title: "Parking Agreement",
+                parking_desc: "To ensure maximum comfort, we have an exclusive agreement with a nearby garage.",
+                garage_btn: "View Garage",
+
+                footer_about_title: "About Mira",
+                footer_about_text: "An exclusive environment where traditional barbering meets contemporary aesthetics. Precision, care, and detail.",
+                slogan: "\"Defining style,<br>one cut at a time.\"",
+                follow_ig: "Follow on Instagram",
+                opening_hours: "Opening Hours",
+                days: "Tue - Sat"
+            },
+            es: {
+                bookBtn: "Reservar",
+                servicesTitle: "Servicios",
+                srv1_name: "Corte con Champú", srv1_desc: "Servicio de corte con champú antes y después, realizado con máquina, peinado incluido.",
+                srv2_name: "Corte a Tijera", srv2_desc: "Servicio de corte con champú y acondicionador, realizado a tijera con acabado a navaja y peinado incluido.",
+                srv3_name: "Corte Niño", srv3_desc: "Servicio de corte con champú reservado para edades 0 - 15.",
+                srv4_name: "Barba / Afeitado Tradicional", srv4_desc: "Servicio de afeitado que incluye crema pre-afeitado, toalla caliente y toalla fría post-afeitado.",
+                srv5_name: "Barba Larga", srv5_desc: "Servicio que incluye limpieza de barba, toalla caliente, secado, modelado, afeitado y toalla fría.",
+                srv6_name: "Ritual Barba", srv6_desc: "Servicio premium que incluye limpieza profunda, toalla caliente pre-afeitado y toalla fría post-afeitado.",
+                srv7_name: "Air Oiling / Anti-Caída", srv7_desc: "Tratamiento con aceites esenciales para el cuidado del cuero cabelludo.",
+                srv8_name: "Tratamiento Purificante", srv8_desc: "Tratamiento exfoliante del cuero cabelludo + loción.",
+                srv9_name: "Tratamiento Facial", srv9_desc: "Tratamiento específico que incluye limpieza, toalla caliente, mascarilla, suero y crema.",
+                srv10_name: "Cejas", srv10_desc: "Limpieza y perfilado estético con pinzas.",
+
+                grid_gallery: "Galería", grid_gallery_sub: "El Salón",
+                grid_portfolio: "Portafolio", grid_portfolio_sub: "Nuestros Cortes",
+                grid_crew: "El Equipo", grid_crew_sub: "Nuestros Barberos",
+                grid_location: "Ubicación", grid_location_sub: "Dónde estamos",
+
+                map_title: "Dónde Estamos",
+                map_desc: "Situado en el corazón de Bari, a pocos pasos de la Estación Central y del Policlínico, MIRA es fácilmente accesible desde el centro, Picone y Carrassi. Un rincón de estilo urbano perfectamente conectado.",
+                parking_title: "Convenio Parking",
+                parking_desc: "Para garantizar el máximo confort, tenemos un convenio exclusivo con un garaje cercano.",
+                garage_btn: "Ver Garaje",
+
+                footer_about_title: "Sobre Mira",
+                footer_about_text: "Un ambiente exclusivo donde la barbería tradicional se encuentra con la estética contemporánea. Precisión, cuidado y detalle.",
+                slogan: "\"Definiendo el estilo,<br>un corte a la vez.\"",
+                follow_ig: "Síguenos en Instagram",
+                opening_hours: "Horarios",
+                days: "Mar - Sáb"
+            }
+        };
+
+        function setLanguage(lang) {
+            localStorage.setItem('mira_lang', lang);
+            
+            // Update Buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+            });
+
+            // Update Text
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
         function toggleService(element) {
             const allItems = document.querySelectorAll('.service-item');
             if (element.classList.contains('active')) {
@@ -842,6 +1045,10 @@
             const preloader = document.getElementById('preloader');
             preloader.classList.add('hide-preloader');
             document.body.classList.remove('preloader-active');
+            
+            // Load saved language or default to IT
+            const savedLang = localStorage.getItem('mira_lang') || 'it';
+            setLanguage(savedLang);
         });
 
         document.addEventListener('DOMContentLoaded', () => {
