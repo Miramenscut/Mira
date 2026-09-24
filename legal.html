@@ -1,280 +1,384 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="index,follow">
-  <title>Privacy Policy — MIRA Men's Cut</title>
-  <meta name="description" content="Informativa sul trattamento dei dati personali per il sito MIRA Men's Cut, Bari.">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <style>
-    :root { --bg:#f7f7f7; --card:#fff; --text:#171717; --muted:#666; --border:#ddd; --accent:#111; }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
-    main { max-width:920px; margin:0 auto; padding:48px 20px 80px; }
-    article { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:36px; box-shadow:0 4px 20px rgba(0,0,0,.04); }
-    h1 { margin-top:0; line-height:1.2; }
-    h2 { margin-top:40px; padding-top:12px; border-top:1px solid #eee; }
-    h3 { margin-top:28px; }
-    p, li { max-width:82ch; }
-    a { color:var(--accent); }
-    .meta { color:var(--muted); font-size:.95rem; }
-    .notice { background:#f1f1f1; border-left:4px solid #222; padding:16px 18px; border-radius:8px; margin:20px 0; }
-    table { width:100%; border-collapse:collapse; margin:18px 0 28px; font-size:.96rem; }
-    th,td { border:1px solid var(--border); padding:10px; vertical-align:top; text-align:left; }
-    th { background:#f2f2f2; }
-    footer { margin-top:28px; color:var(--muted); font-size:.9rem; }
-    @media(max-width:650px){ article{padding:22px;} table{display:block;overflow-x:auto;} }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy, termini e Cookie Policy di MIRA Men's Cut.">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Privacy Policy e Cookie Policy | MIRA Men's Cut</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ccc;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 { color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; font-size: 1.8rem; text-align: center; }
+        h2 { color: #fff; margin-top: 30px; margin-bottom: 15px; font-size: 1.2rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        p { margin-bottom: 15px; font-size: 0.9rem; }
+        ul { margin-bottom: 15px; padding-left: 20px; }
+        li { margin-bottom: 5px; font-size: 0.9rem; }
+        a { color: #fff; text-decoration: underline; }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid #fff;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        .back-btn:hover { background: #fff; color: #000; }
+        .footer-note { margin-top: 50px; font-size: 0.7rem; text-align: center; opacity: 0.5; }
+    
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { overflow-wrap: anywhere; }
+        h3 { color: #fff; font-size: 1rem; margin: 24px 0 10px; }
+        strong { color: #fff; font-weight: 600; }
+        .policy-tabs { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 32px; }
+        .policy-tab { cursor: pointer; background: transparent; font: inherit; color: #ccc; border: 1px solid #777; padding: 10px 20px; text-transform: uppercase; letter-spacing: .04em; font-size: .8rem; transition: .3s; }
+        .policy-tab:hover, .policy-tab[aria-selected="true"] { background: #fff; border-color: #fff; color: #000; }
+        .policy-tab:focus-visible, a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+        .policy-panel[hidden] { display: none; }
+        .notice { border-left: 2px solid #888; padding: 10px 15px; margin: 20px 0; background: #151515; font-size: .9rem; }
+        .table-scroll { overflow-x: auto; margin: 20px 0; }
+        table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .85rem; }
+        th, td { text-align: left; vertical-align: top; border: 1px solid #333; padding: 10px; }
+        th { color: #fff; background: #171717; }
+        code { color: #fff; overflow-wrap: anywhere; }
+        .policy-panel > footer { margin-top: 50px; }
+        @media (max-width: 600px) { body { padding: 24px 16px; } .policy-tab { flex: 1; } }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
 </head>
 <body>
-<main>
-<article>
-  <p><a href="index.html">← Torna alla Home</a> · <a href="cookie-policy.html">Cookie Policy</a></p>
-  <h1>Privacy Policy</h1>
-  <p class="meta"><strong>Ultimo aggiornamento: 24 settembre 2026</strong></p>
+    <a href="index.html" class="back-btn">← Torna alla Home</a>
+    <nav class="policy-tabs" role="tablist" aria-label="Informative legali">
+        <button class="policy-tab" id="privacy-tab" type="button" role="tab" aria-controls="privacy-policy" aria-selected="true" tabindex="0">Privacy Policy</button>
+        <button class="policy-tab" id="cookie-tab" type="button" role="tab" aria-controls="cookie-policy" aria-selected="false" tabindex="-1">Cookie Policy</button>
+    </nav>
+    <main>
+<article aria-labelledby="privacy-tab" class="policy-panel" id="privacy-policy" role="tabpanel">
 
-  <div class="notice">
-    <strong>Nota per il titolare:</strong> prima del deploy sostituire il campo del titolare con il nome/cognome o la ragione sociale del soggetto giuridico che gestisce MIRA e con Partita IVA/Codice Fiscale. L'indirizzo attuale del sito è Via Giulio Petroni 12, Bari; verificare comunque che coincida con la sede operativa e con i dati fiscali del titolare.
-  </div>
-
-  <h2>1. Titolare del trattamento</h2>
-  <p>
+<h1>Privacy Policy</h1>
+<p class="meta"><strong>Ultimo aggiornamento: 24 settembre 2026</strong></p>
+<!--Nota per il titolare: Nota per il titolare: prima del deploy sostituire il campo del titolare con il nome/cognome o la ragione sociale del soggetto giuridico che gestisce MIRA e con Partita IVA/Codice Fiscale. L'indirizzo attuale del sito è Via Giulio Petroni 12, Bari; verificare comunque che coincida con la sede operativa e con i dati fiscali del titolare.-->
+<h2>1. Titolare del trattamento</h2>
+<p>
     Il titolare del trattamento dei dati personali è <strong>FABIO IEVA</strong>,
     che opera commercialmente con il nome <strong>MIRA Men's Cut</strong>, con sede in Via Giulio Petroni 12, 70124 Bari (BA), Italia.
   </p>
-  <p>
-    Partita IVA: <strong>08801340723</strong><br>
-    E-mail: <a href="mailto:miramenscut97@gmail.com">miramenscut97@gmail.com</a><br>
+<p>
+    Partita IVA: <strong>08801340723</strong><br/>
+    E-mail: <a href="mailto:miramenscut97@gmail.com">miramenscut97@gmail.com</a><br/>
     Telefono / WhatsApp Business: <a href="https://wa.me/393762061609" rel="noopener noreferrer">+39 376 206 1609</a>
-  </p>
-  <p>
+</p>
+<p>
     Sulla base dei trattamenti attualmente descritti, non risulta necessaria la designazione di un Responsabile della Protezione dei Dati (RPD/DPO). La valutazione dovrà essere riesaminata qualora cambino natura, ambito, finalità o dimensione dei trattamenti.
   </p>
-
-  <h2>2. Ambito dell'informativa</h2>
-  <p>
+<h2>2. Ambito dell'informativa</h2>
+<p>
     La presente informativa riguarda il sito <strong>www.miramenscut.it</strong> e i trattamenti connessi alle richieste di informazioni, prenotazione e gestione dei servizi di MIRA Men's Cut.
   </p>
-  <p>
+<p>
     Il sito è una vetrina informativa. Non dispone di account cliente, carrello, checkout, pagamento online o sistema di prenotazione integrato. Gli appuntamenti vengono richiesti e gestiti principalmente tramite WhatsApp o telefono.
   </p>
-
-  <h2>3. Dati personali trattati</h2>
-
-  <h3>3.1 Dati di navigazione e sicurezza</h3>
-  <p>
+<h2>3. Dati personali trattati</h2>
+<h3>3.1 Dati di navigazione e sicurezza</h3>
+<p>
     Per effetto della pubblicazione del sito tramite GitHub Pages, il provider dichiara che l'indirizzo IP dei visitatori viene registrato e conservato per finalità di sicurezza, anche quando il visitatore non è autenticato a GitHub.
     MIRA non usa tali dati per proprie attività di analytics, profilazione o pubblicità comportamentale.
   </p>
-
-  <h3>3.2 Risorse esterne caricate dalla pagina</h3>
-  <p>
+<h3>3.2 Risorse esterne caricate dalla pagina</h3>
+<p>
     Il codice del sito attualmente richiama <strong>Google Fonts</strong> (fonts.googleapis.com / fonts.gstatic.com) e <strong>Font Awesome tramite la CDN cdnjs di Cloudflare</strong> per font e icone. Questi collegamenti sono risorse tecniche, non servizi di analytics o pubblicità e non equivalgono, di per sé, all'installazione di un cookie di profilazione.
   </p>
-  <p>
+<p>
     Il caricamento di una risorsa ospitata da un terzo comporta tuttavia una richiesta HTTP verso il relativo fornitore, con i dati tecnici necessari alla comunicazione di rete, che possono includere l'indirizzo IP, informazioni sul browser e sulla richiesta. Per applicare un approccio di minimizzazione e privacy by design, MIRA raccomanda di scaricare e servire localmente dal proprio sito i font e le icone, eliminando le chiamate a domini terzi non necessarie.
   </p>
-  <p>
+<p>
     L'eventuale auto-ospitaggio di tali risorse deve essere completato prima di considerare questa sezione aggiornata rispetto al codice effettivamente pubblicato.
   </p>
-
-  <h3>3.3 Dati forniti tramite WhatsApp o telefono</h3>
-  <p>
+<h3>3.3 Dati forniti tramite WhatsApp o telefono</h3>
+<p>
     Quando una persona contatta MIRA per una prenotazione o per chiedere informazioni, possono essere trattati il numero di telefono, il nome eventualmente indicato, il contenuto dei messaggi, la data e l'ora della comunicazione, la richiesta di servizio, la preferenza di orario e ogni altro dato volontariamente comunicato.
   </p>
-  <p>
+<p>
     Il collegamento WhatsApp presente sul sito trasferisce l'utente al servizio WhatsApp. I trattamenti effettuati direttamente da WhatsApp sono disciplinati dai documenti e dalle informative di WhatsApp/Meta applicabili al servizio.
   </p>
-
-  <h3>3.4 Richieste di informazioni sui prodotti</h3>
-  <p>
+<h3>3.4 Richieste di informazioni sui prodotti</h3>
+<p>
     La sezione “Prodotti” presenta alcuni articoli disponibili in negozio. Il pulsante visualizzato come <strong>“Acquista”</strong> non attiva un acquisto online: apre WhatsApp con un messaggio preimpostato relativo al prodotto selezionato, allo scopo di chiedere maggiori informazioni.
   </p>
-  <p>
+<p>
     Sul sito non vengono effettuati ordini vincolanti, pagamenti, gestione di carte di pagamento, checkout o consegne. La vendita degli eventuali prodotti avviene esclusivamente in negozio. Le informazioni che l'utente decide di inviare a MIRA tramite WhatsApp vengono trattate secondo quanto indicato nella presente informativa.
   </p>
-
-  <h3>3.5 Dati relativi agli appuntamenti e ai servizi</h3>
-  <p>
+<h3>3.5 Dati relativi agli appuntamenti e ai servizi</h3>
+<p>
     Sono trattati i dati strettamente necessari per fissare, modificare, confermare o annullare un appuntamento e per erogare il servizio richiesto.
     MIRA non richiede tramite il sito categorie particolari di dati personali. Si invita a non inviare tramite WhatsApp informazioni sanitarie, documenti di identità, dati bancari, password o altre informazioni non necessarie.
   </p>
-
-  <h3>3.6 Minori</h3>
-  <p>
+<h3>3.6 Minori</h3>
+<p>
     Il sito presenta anche un servizio di taglio per ragazzi da 0 a 15 anni. Quando la prenotazione riguarda un minore, i dati strettamente necessari possono essere comunicati dal genitore o da chi esercita la responsabilità genitoriale.
   </p>
-  <p>
+<p>
     Qualsiasi pubblicazione di fotografie o video riconducibili a minori sui social media costituisce un trattamento distinto che dovrà essere valutato e gestito separatamente, con particolare attenzione alla responsabilità genitoriale, al superiore interesse del minore e alla base giuridica applicabile. La presente informativa non costituisce una liberatoria per la pubblicazione di immagini.
   </p>
-
-  <h2>4. Finalità e basi giuridiche</h2>
-  <table>
-    <thead>
-      <tr><th>Finalità</th><th>Dati trattati</th><th>Base giuridica</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Visualizzazione, sicurezza e continuità del sito</td>
-        <td>IP e dati tecnici di connessione</td>
-        <td>Art. 6.1(f) GDPR: legittimo interesse alla sicurezza e alla disponibilità dell'infrastruttura, nei limiti necessari.</td>
-      </tr>
-      <tr>
-        <td>Gestire richieste di prenotazione e richieste precontrattuali</td>
-        <td>Numero, nome eventualmente indicato, messaggi e dati dell'appuntamento</td>
-        <td>Art. 6.1(b) GDPR, quando il trattamento è necessario per eseguire misure precontrattuali adottate su richiesta dell'interessato o per gestire il servizio richiesto.</td>
-      </tr>
-      <tr>
-        <td>Comunicazioni organizzative relative ad appuntamenti e servizi</td>
-        <td>Dati di contatto e informazioni sull'appuntamento</td>
-        <td>Art. 6.1(b) GDPR o, ove appropriato, art. 6.1(f) GDPR per le comunicazioni strettamente funzionali alla gestione del rapporto.</td>
-      </tr>
-      <tr>
-        <td>Gestione delle richieste di informazioni sui prodotti</td>
-        <td>Numero e contenuto della richiesta WhatsApp</td>
-        <td>Art. 6.1(b) GDPR quando la richiesta è finalizzata a instaurare un rapporto contrattuale; in alternativa, art. 6.1(f) GDPR per la gestione di una richiesta informativa volontaria.</td>
-      </tr>
-      <tr>
-        <td>Adempimenti fiscali, contabili e amministrativi</td>
-        <td>Dati richiesti dalla normativa applicabile</td>
-        <td>Art. 6.1(c) GDPR: adempimento di un obbligo legale.</td>
-      </tr>
-      <tr>
-        <td>Accertare, esercitare o difendere diritti</td>
-        <td>Dati pertinenti alla tutela del diritto</td>
-        <td>Art. 6.1(f) GDPR: legittimo interesse alla tutela dei diritti, nei limiti previsti dalla legge.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>5. WhatsApp Business</h2>
-  <p>
+<h2>4. Finalità e basi giuridiche</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr><th>Finalità</th><th>Dati trattati</th><th>Base giuridica</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Visualizzazione, sicurezza e continuità del sito</td>
+<td>IP e dati tecnici di connessione</td>
+<td>Art. 6.1(f) GDPR: legittimo interesse alla sicurezza e alla disponibilità dell'infrastruttura, nei limiti necessari.</td>
+</tr>
+<tr>
+<td>Gestire richieste di prenotazione e richieste precontrattuali</td>
+<td>Numero, nome eventualmente indicato, messaggi e dati dell'appuntamento</td>
+<td>Art. 6.1(b) GDPR, quando il trattamento è necessario per eseguire misure precontrattuali adottate su richiesta dell'interessato o per gestire il servizio richiesto.</td>
+</tr>
+<tr>
+<td>Comunicazioni organizzative relative ad appuntamenti e servizi</td>
+<td>Dati di contatto e informazioni sull'appuntamento</td>
+<td>Art. 6.1(b) GDPR o, ove appropriato, art. 6.1(f) GDPR per le comunicazioni strettamente funzionali alla gestione del rapporto.</td>
+</tr>
+<tr>
+<td>Gestione delle richieste di informazioni sui prodotti</td>
+<td>Numero e contenuto della richiesta WhatsApp</td>
+<td>Art. 6.1(b) GDPR quando la richiesta è finalizzata a instaurare un rapporto contrattuale; in alternativa, art. 6.1(f) GDPR per la gestione di una richiesta informativa volontaria.</td>
+</tr>
+<tr>
+<td>Adempimenti fiscali, contabili e amministrativi</td>
+<td>Dati richiesti dalla normativa applicabile</td>
+<td>Art. 6.1(c) GDPR: adempimento di un obbligo legale.</td>
+</tr>
+<tr>
+<td>Accertare, esercitare o difendere diritti</td>
+<td>Dati pertinenti alla tutela del diritto</td>
+<td>Art. 6.1(f) GDPR: legittimo interesse alla tutela dei diritti, nei limiti previsti dalla legge.</td>
+</tr>
+</tbody>
+</table></div>
+<h2>5. WhatsApp Business</h2>
+<p>
     MIRA utilizza <strong>WhatsApp Business esclusivamente per la gestione delle prenotazioni e delle richieste di informazioni</strong>. Non utilizza il numero ottenuto per la prenotazione per inviare automaticamente comunicazioni promozionali.
   </p>
-  <p>
+<p>
     I nuovi WhatsApp Business App Terms entrano in vigore il 23 settembre 2026. Per la Regione Europea l'entità contrattuale indicata da WhatsApp è <strong>WhatsApp Ireland Limited</strong>. Gli stessi termini stabiliscono che, quando il GDPR richiede la distinzione tra titolare e responsabile, il business che usa il servizio è il Controller e l'entità WhatsApp contrattuale agisce come Processor per i Customer Data, secondo i relativi Data Processing Terms.
   </p>
-  <p>
+<p>
     WhatsApp dichiara inoltre che i dati e le informazioni del servizio possono essere trasferiti e trattati negli Stati Uniti e in altri Paesi, secondo i meccanismi e le garanzie previsti dalla normativa applicabile e dalla relativa documentazione contrattuale.
   </p>
-  <p>
-    Riferimenti: <a href="https://www.whatsapp.com/legal/WhatsApp-Terms-for-WhatsApp-Business-App/preview" target="_blank" rel="noopener noreferrer">WhatsApp Business App Terms</a> e <a href="https://www.whatsapp.com/legal/business-data-processing-terms" target="_blank" rel="noopener noreferrer">WhatsApp Business Data Processing Terms</a>.
+<p>
+    Riferimenti: <a href="https://www.whatsapp.com/legal/WhatsApp-Terms-for-WhatsApp-Business-App/preview" rel="noopener noreferrer">WhatsApp Business App Terms</a> e <a href="https://www.whatsapp.com/legal/business-data-processing-terms" rel="noopener noreferrer">WhatsApp Business Data Processing Terms</a>.
   </p>
-
-  <h2>6. Comunicazioni promozionali</h2>
-  <p>
+<h2>6. Comunicazioni promozionali</h2>
+<p>
     Alla data del presente documento MIRA non effettua newsletter, campagne automatizzate, messaggi promozionali o attività di profilazione tramite WhatsApp, e-mail o altri canali elettronici.
   </p>
-  <p>
+<p>
     Qualora in futuro venissero introdotte comunicazioni commerciali elettroniche, la relativa attività sarà sottoposta a una verifica preventiva della base giuridica e, quando previsto dalla normativa, a un consenso specifico e documentabile. Il semplice fatto di aver chiesto una prenotazione o informazioni non viene considerato, da MIRA, come adesione a una lista marketing.
   </p>
-
-  <h2>7. Cookie e strumenti di tracciamento</h2>
-  <p>
+<h2>7. Cookie e strumenti di tracciamento</h2>
+<p>
     MIRA non utilizza Google Analytics/GA4, Meta Pixel, TikTok Pixel, Google Ads, sistemi di remarketing, newsletter tracking o strumenti equivalenti di profilazione/advertising. Il sito non integra feed Instagram, Google Maps o Waze: sono presenti collegamenti esterni che richiedono all'utente di lasciare il sito.
   </p>
-  <p>
-    Per la configurazione attuale non viene utilizzato un cookie banner di consenso perché non risultano presenti cookie o altri strumenti di tracciamento non necessari che richiedano il consenso preventivo. Rimane disponibile una Cookie Policy separata e aggiornata alle tecnologie effettivamente presenti.
+<p>
+    Per la configurazione attuale non viene utilizzato un cookie banner di consenso perché non risultano presenti cookie o altri strumenti di tracciamento non necessari che richiedano il consenso preventivo. La Cookie Policy è disponibile in questa pagina.
   </p>
-  <p>
-    La disciplina applicabile e le condizioni per l'eventuale introduzione futura di strumenti non necessari sono descritte nella <a href="cookie-policy.html">Cookie Policy</a>.
+<p>
+    La disciplina applicabile e le condizioni per l'eventuale introduzione futura di strumenti non necessari sono descritte nella <a href="#cookie-policy">Cookie Policy</a>.
   </p>
-
-  <h2>8. Destinatari e fornitori</h2>
-  <p>
+<h2>8. Destinatari e fornitori</h2>
+<p>
     I dati possono essere trattati, nei limiti delle rispettive attività, da fornitori tecnologici e soggetti che supportano MIRA, tra cui:
   </p>
-  <ul>
-    <li><strong>GitHub Pages / GitHub</strong>, per la pubblicazione del sito statico e la sicurezza dell'infrastruttura;</li>
-    <li><strong>WhatsApp Ireland Limited / società del gruppo Meta</strong>, per il servizio WhatsApp Business;</li>
-    <li>professionisti e fornitori amministrativi, fiscali, informatici o legali, quando necessario per gli obblighi e le attività di MIRA.</li>
-  </ul>
-  <p>
+<ul>
+<li><strong>GitHub Pages / GitHub</strong>, per la pubblicazione del sito statico e la sicurezza dell'infrastruttura;</li>
+<li><strong>WhatsApp Ireland Limited / società del gruppo Meta</strong>, per il servizio WhatsApp Business;</li>
+<li>professionisti e fornitori amministrativi, fiscali, informatici o legali, quando necessario per gli obblighi e le attività di MIRA.</li>
+</ul>
+<p>
     Il ruolo privacy di ciascun fornitore dipende dal trattamento effettivamente svolto e dai relativi accordi. I soggetti che trattano dati per conto di MIRA vengono qualificati ai sensi dell'art. 28 GDPR quando ne ricorrono i presupposti.
   </p>
-
-  <h2>9. Trasferimenti internazionali</h2>
-  <p>
+<h2>9. Trasferimenti internazionali</h2>
+<p>
     Alcuni fornitori tecnologici possono trattare dati personali al di fuori dello Spazio Economico Europeo. In tali casi, il trasferimento deve essere effettuato nel rispetto del Capo V GDPR, mediante una decisione di adeguatezza o altra garanzia prevista dagli artt. 44 e seguenti GDPR, quando necessaria.
   </p>
-  <p>
+<p>
     Per i propri servizi GitHub dichiara di poter trattare dati in vari Paesi, inclusi Stati Uniti, e di utilizzare, a seconda dei casi, clausole contrattuali standard e il Data Privacy Framework. WhatsApp Business prevede a sua volta trasferimenti e trattamento globale secondo i propri termini e documenti sul trattamento dei dati.
   </p>
-
-  <h2>10. Conservazione dei dati</h2>
-  <p>
+<h2>10. Conservazione dei dati</h2>
+<p>
     MIRA conserva i dati per il periodo necessario alla specifica finalità e, successivamente, per il tempo necessario ad adempiere obblighi legali o ad accertare, esercitare o difendere diritti.
   </p>
-  <ul>
-    <li><strong>Richieste e messaggi relativi ad appuntamenti:</strong> per il tempo necessario alla gestione della richiesta e del rapporto; le conversazioni obsolete dovrebbero essere periodicamente eliminate quando non più necessarie.</li>
-    <li><strong>Dati fiscali e contabili:</strong> per i periodi previsti dalla normativa applicabile.</li>
-    <li><strong>Dati tecnici del sito:</strong> secondo i periodi e le configurazioni del provider di hosting, per le finalità di sicurezza e funzionamento dichiarate dal provider.</li>
-    <li><strong>Marketing:</strong> attività non attiva alla data di questa informativa.</li>
-  </ul>
-
-  <h2>11. Sicurezza</h2>
-  <p>
+<ul>
+<li><strong>Richieste e messaggi relativi ad appuntamenti:</strong> per il tempo necessario alla gestione della richiesta e del rapporto; le conversazioni obsolete dovrebbero essere periodicamente eliminate quando non più necessarie.</li>
+<li><strong>Dati fiscali e contabili:</strong> per i periodi previsti dalla normativa applicabile.</li>
+<li><strong>Dati tecnici del sito:</strong> secondo i periodi e le configurazioni del provider di hosting, per le finalità di sicurezza e funzionamento dichiarate dal provider.</li>
+<li><strong>Marketing:</strong> attività non attiva alla data di questa informativa.</li>
+</ul>
+<h2>11. Sicurezza</h2>
+<p>
     MIRA adotta misure tecniche e organizzative proporzionate al rischio, quali protezione del dispositivo e dell'account WhatsApp Business, controllo degli accessi e aggiornamento dei sistemi utilizzati per gestire i dati.
   </p>
-  <p>
+<p>
     L'accesso all'account WhatsApp Business dovrebbe essere riservato alle persone autorizzate, con credenziali e dispositivi protetti e, quando disponibile, autenticazione a più fattori. In caso di violazione dei dati personali, MIRA valuterà gli obblighi di gestione e notifica previsti dal GDPR.
   </p>
-
-  <h2>12. Profilazione e decisioni automatizzate</h2>
-  <p>
+<h2>12. Profilazione e decisioni automatizzate</h2>
+<p>
     MIRA non effettua profilazione degli utenti del sito per finalità pubblicitarie e non adotta decisioni basate esclusivamente su trattamenti automatizzati che producano effetti giuridici o analogamente significativi sull'interessato.
   </p>
-
-  <h2>13. Conferimento dei dati</h2>
-  <p>
+<h2>13. Conferimento dei dati</h2>
+<p>
     La navigazione del sito non richiede di creare un account o compilare moduli. Per la gestione di una prenotazione o di una richiesta tramite WhatsApp/telefono, il conferimento dei dati necessari è funzionale alla gestione della richiesta. L'eventuale mancato conferimento può impedire a MIRA di rispondere o di fissare l'appuntamento.
   </p>
-
-  <h2>14. Diritti dell'interessato</h2>
-  <p>
+<h2>14. Diritti dell'interessato</h2>
+<p>
     Nei casi previsti dagli artt. 15-22 GDPR, l'interessato può chiedere accesso ai dati, rettifica, cancellazione, limitazione del trattamento, portabilità, opposizione e, quando il trattamento è basato sul consenso, revoca del consenso. I diritti possono essere soggetti alle limitazioni previste dalla normativa.
   </p>
-  <p>
+<p>
     Le richieste possono essere inviate a <a href="mailto:miramenscut97@gmail.com">miramenscut97@gmail.com</a>. MIRA risponde nei termini previsti dall'art. 12 GDPR.
   </p>
-  <p>
-    L'interessato può inoltre proporre reclamo al <strong>Garante per la protezione dei dati personali</strong>: <a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener noreferrer">www.garanteprivacy.it</a>.
+<p>
+    L'interessato può inoltre proporre reclamo al <strong>Garante per la protezione dei dati personali</strong>: <a href="https://www.garanteprivacy.it/" rel="noopener noreferrer">www.garanteprivacy.it</a>.
   </p>
-
-  <h2>15. Modifiche alla policy</h2>
-  <p>
+<h2>15. Modifiche alla policy</h2>
+<p>
     MIRA può aggiornare la presente informativa per adeguarla a modifiche normative, tecnologiche o organizzative. L'ultima versione pubblicata sul sito è quella applicabile a decorrere dalla data indicata in testa al documento.
   </p>
-
-  <h2>16. Termini essenziali di utilizzo del sito</h2>
-  <h3>16.1 Natura informativa</h3>
-  <p>Il sito presenta servizi, prodotti e informazioni relative a MIRA Men's Cut. Prezzi, disponibilità, orari e contenuti possono essere aggiornati.</p>
-
-  <h3>16.2 Prenotazioni</h3>
-  <p>Il sito non effettua prenotazioni online automatiche. Le richieste vengono gestite tramite WhatsApp o telefono e la disponibilità effettiva viene confermata da MIRA.</p>
-
-  <h3>16.3 Prodotti</h3>
-  <p>La sezione prodotti non costituisce un negozio online. Il comando “Acquista” è utilizzato per aprire WhatsApp e richiedere informazioni sul prodotto selezionato. La vendita, quando effettuata, avviene in negozio.</p>
-
-  <h3>16.4 Collegamenti esterni</h3>
-  <p>Il sito contiene collegamenti verso WhatsApp, Google Maps, Waze e il profilo Instagram di MIRA. L'utilizzo dei servizi esterni è disciplinato dai relativi termini e informative.</p>
-
-  <h3>16.5 Proprietà intellettuale</h3>
-  <p>Salvo diversa indicazione, i contenuti originali pubblicati sul sito sono utilizzati da MIRA Men's Cut con i relativi diritti o autorizzazioni. È vietata la riproduzione non autorizzata dei contenuti protetti dalla legge.</p>
-
-  <h2>17. Riferimenti normativi essenziali</h2>
-  <ul>
-    <li>Regolamento (UE) 2016/679 (GDPR), in particolare artt. 5-7, 12-22, 24-25, 28, 32 e 44 ss.;</li>
-    <li>D.lgs. 196/2003 (Codice Privacy), come modificato, in particolare artt. 122 e 130;</li>
-    <li>Linee guida del Garante Privacy su cookie e altri strumenti di tracciamento, provvedimento n. 231 del 10 giugno 2021;</li>
-    <li>Orientamenti EDPB 2/2023 sull'ambito tecnico dell'art. 5(3) ePrivacy, versione finale 2.0 adottata il 7 ottobre 2024.</li>
-  </ul>
-
-  <footer>
+<h2>16. Termini essenziali di utilizzo del sito</h2>
+<h3>16.1 Natura informativa</h3>
+<p>Il sito presenta servizi, prodotti e informazioni relative a MIRA Men's Cut. Prezzi, disponibilità, orari e contenuti possono essere aggiornati.</p>
+<h3>16.2 Prenotazioni</h3>
+<p>Il sito non effettua prenotazioni online automatiche. Le richieste vengono gestite tramite WhatsApp o telefono e la disponibilità effettiva viene confermata da MIRA.</p>
+<h3>16.3 Prodotti</h3>
+<p>La sezione prodotti non costituisce un negozio online. Il comando “Acquista” è utilizzato per aprire WhatsApp e richiedere informazioni sul prodotto selezionato. La vendita, quando effettuata, avviene in negozio.</p>
+<h3>16.4 Collegamenti esterni</h3>
+<p>Il sito contiene collegamenti verso WhatsApp, Google Maps, Waze e il profilo Instagram di MIRA. L'utilizzo dei servizi esterni è disciplinato dai relativi termini e informative.</p>
+<h3>16.5 Proprietà intellettuale</h3>
+<p>Salvo diversa indicazione, i contenuti originali pubblicati sul sito sono utilizzati da MIRA Men's Cut con i relativi diritti o autorizzazioni. È vietata la riproduzione non autorizzata dei contenuti protetti dalla legge.</p>
+<h2>17. Riferimenti normativi essenziali</h2>
+<ul>
+<li>Regolamento (UE) 2016/679 (GDPR), in particolare artt. 5-7, 12-22, 24-25, 28, 32 e 44 ss.;</li>
+<li>D.lgs. 196/2003 (Codice Privacy), come modificato, in particolare artt. 122 e 130;</li>
+<li>Linee guida del Garante Privacy su cookie e altri strumenti di tracciamento, provvedimento n. 231 del 10 giugno 2021;</li>
+<li>Orientamenti EDPB 2/2023 sull'ambito tecnico dell'art. 5(3) ePrivacy, versione finale 2.0 adottata il 7 ottobre 2024.</li>
+</ul>
+<footer class="footer-note">
     © 2026 MIRA Men's Cut — Bari. Informativa aggiornata al 24/09/2026.
   </footer>
 </article>
-</main>
+<article aria-labelledby="cookie-tab" class="policy-panel" hidden="" id="cookie-policy" role="tabpanel">
+
+<h1>Cookie Policy</h1>
+<p><strong>Ultimo aggiornamento: 24 settembre 2026</strong></p>
+<div class="notice">
+<strong>Configurazione attuale:</strong> il sito MIRA Men's Cut non utilizza intenzionalmente cookie di profilazione, pubblicità o analytics non necessari. Per questa configurazione non viene mostrato un cookie banner di consenso.
+</div>
+<h2>1. Cosa sono cookie e strumenti di tracciamento</h2>
+<p>
+  I cookie sono informazioni che possono essere memorizzate o lette sul dispositivo dell'utente. La disciplina applicabile comprende l'art. 122 del Codice Privacy e le Linee guida del Garante Privacy del 10 giugno 2021. Le regole riguardano anche altre tecniche di tracciamento nei casi previsti dall'ambito tecnico dell'art. 5(3) della direttiva ePrivacy.
+</p>
+<h2>2. Cookie e strumenti utilizzati da MIRA</h2>
+<div class="table-scroll"><table>
+<thead><tr><th>Strumento</th><th>Stato</th><th>Consenso</th></tr></thead>
+<tbody>
+<tr><td>Cookie strettamente necessari</td><td>Non sono stati configurati cookie applicativi propri per account, carrello, login o preferenze di marketing.</td><td>Se presenti esclusivamente per funzionamento/sicurezza e rientranti nelle esenzioni applicabili, non è richiesto il consenso; resta necessaria l'informativa.</td></tr>
+<tr><td>Google Analytics / GA4</td><td>Non utilizzato.</td><td>Non applicabile.</td></tr>
+<tr><td>Meta Pixel / TikTok Pixel / Google Ads / remarketing</td><td>Non utilizzati.</td><td>Non applicabile.</td></tr>
+<tr><td>Newsletter tracking / pixel di marketing</td><td>Non utilizzati.</td><td>Non applicabile.</td></tr>
+<tr><td>Instagram / Google Maps / Waze embedded</td><td>Non incorporati nel sito; sono presenti collegamenti esterni.</td><td>Il semplice caricamento della pagina MIRA non attiva il servizio esterno come contenuto incorporato.</td></tr>
+</tbody>
+</table></div>
+<h2>3. Google Fonts e Font Awesome: risorse esterne</h2>
+<p>
+  Il codice attualmente in uso richiama Google Fonts e Font Awesome tramite una CDN di Cloudflare (cdnjs). Queste risorse non sono descritte come “cookie tecnici”: sono richieste HTTP a server di terzi per scaricare fogli di stile, font e icone.
+</p>
+<p>Il caricamento di una risorsa esterna può comportare la trasmissione di dati tecnici necessari alla connessione, come l’indirizzo IP e informazioni relative alla richiesta. Per limitare le comunicazioni verso terzi, font e icone possono essere ospitati direttamente sul sito.</p>
+<!--Nota operativa: Dopo l'auto-ospitaggio, il codice HTML non dovrà più contenere richieste verso fonts.googleapis.com , fonts.gstatic.com o la CDN cdnjs per queste risorse.-->
+<p>Una richiesta a un server esterno non equivale automaticamente all’uso di un cookie di profilazione: contano la tecnologia impiegata e le finalità del trattamento.</p>
+<h2>4. GitHub Pages</h2>
+<p>
+  Il sito è pubblicato con GitHub Pages. GitHub dichiara che, quando un sito GitHub Pages viene visitato, l'indirizzo IP del visitatore viene registrato e conservato per finalità di sicurezza, anche se il visitatore non è autenticato a GitHub. Questo trattamento è distinto dai cookie installati nel browser.
+</p>
+<p>Riferimento: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages" rel="noopener noreferrer">GitHub Pages — What is GitHub Pages?</a>.</p>
+<h2>5. Collegamenti esterni</h2>
+<p>
+  Il sito contiene collegamenti a WhatsApp, Google Maps, Waze e al profilo Instagram di MIRA. Sono collegamenti esterni e non iframe/feed incorporati nella pagina. Quando l'utente apre uno di questi servizi, il trattamento dei dati passa al relativo gestore e si applicano le rispettive informative e impostazioni.
+</p>
+<h2>6. Perché non c'è un cookie banner</h2>
+<p>
+  Il Garante distingue i cookie e gli strumenti strettamente necessari da quelli non necessari per finalità ulteriori. Quando un sito utilizza esclusivamente strumenti tecnici esenti dal consenso o non utilizza cookie non necessari, non è necessario mostrare un banner per acquisire il consenso. Resta l'obbligo di fornire un'informativa adeguata.
+</p>
+<p>Per la configurazione attuale di MIRA non viene quindi mostrato un banner di consenso.</p>
+<h2>7. Quando sarà necessario attivare un banner</h2>
+<p>Prima di attivare qualunque tecnologia non necessaria, dovrà essere rivalutata la Cookie Policy. Esempi tipici:</p>
+<ul>
+<li>analytics che richiedano il consenso nella specifica configurazione;</li>
+<li>pixel pubblicitari o di remarketing;</li>
+<li>contenuti incorporati di terzi che leggano o scrivano identificatori non necessari prima dell'interazione dell'utente;</li>
+<li>altri strumenti di tracciamento non strettamente necessari.</li>
+</ul>
+<p>
+  In questi casi gli strumenti soggetti a consenso dovranno essere bloccati prima della manifestazione della scelta dell'utente. Il semplice scrolling o la prosecuzione della navigazione non sostituiscono il consenso valido.
+</p>
+<!--Nota operativa: 8. Gestione futura del consenso-->
+<!--Nota operativa: Nel repository è disponibile un modulo JavaScript opzionale per il consenso, ma è disattivato per la configurazione attuale. Non deve essere incluso o attivato soltanto per “avere un banner”: deve essere collegato a un reale sistema di blocco e attivazione degli strumenti non necessari.-->
+<h2>8. Riferimenti</h2>
+<ul>
+<li><a href="https://www.garanteprivacy.it/home/docweb/-/docweb-display/print/9677876" rel="noopener noreferrer">Garante Privacy — Linee guida cookie e altri strumenti di tracciamento, 10 giugno 2021</a></li>
+<li><a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2003-06-30;196~art122=" rel="noopener noreferrer">Normattiva — Art. 122 Codice Privacy</a></li>
+<li><a href="https://www.edpb.europa.eu/documents/guideline/guidelines-22023-on-technical-scope-art-53-eprivacy-directive_en" rel="noopener noreferrer">EDPB — Guidelines 2/2023, versione finale 2.0</a></li>
+</ul>
+<!--Nota operativa: Questa Cookie Policy deve essere aggiornata ogni volta che il codice introduce nuovi script, cookie, pixel, iframe, analytics, funzionalità social o altre tecnologie di tracciamento.-->
+</article>
+    </main>
+    <script>
+    (() => {
+        const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+        const panels = tabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
+        const activate = (index, focus = false) => {
+            tabs.forEach((tab, i) => {
+                const selected = i === index;
+                tab.setAttribute('aria-selected', String(selected));
+                tab.tabIndex = selected ? 0 : -1;
+                panels[i].hidden = !selected;
+            });
+            if (focus) tabs[index].focus();
+        };
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                if (location.hash !== '#' + panels[index].id) location.hash = panels[index].id;
+                activate(index);
+            });
+            tab.addEventListener('keydown', event => {
+                if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+                event.preventDefault();
+                const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 :
+                    (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+                if (location.hash !== '#' + panels[next].id) location.hash = panels[next].id;
+                activate(next, true);
+            });
+        });
+        const syncHash = () => {
+            if (location.hash === '#cookie-policy') activate(1);
+            else if (location.hash === '#privacy-policy') activate(0);
+        };
+        window.addEventListener('hashchange', syncHash);
+        syncHash();
+    })();
+    </script>
 </body>
 </html>
